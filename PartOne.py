@@ -7,7 +7,7 @@ import spacy
 import os
 import glob
 from pathlib import Path
-import pandas
+import pandas as pd
 
 nlp = spacy.load("en_core_web_sm")      #load spacy pre-trained model
 nlp.max_length = 2000000
@@ -77,8 +77,7 @@ def read_novels(path=Path.cwd() / "p1-texts" / "novels"):
         "year": years
     })    
     
-    df = df.sort_values("year").reset_index(drop=True)
-        
+    df = df.sort_values("year").reset_index(drop=True) 
     return df
 
 
