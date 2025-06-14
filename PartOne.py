@@ -29,7 +29,10 @@ nlp.max_length = 2000000
 
 
 # Part One 1(a): Read the contents of each .txt file
+
 def read_novels(path=Path.cwd() / "p1-texts" / "novels"):
+# def read_novels(path=Path(r'C:\Users\ClaudiaRoehn\Desktop\New folder\OneDrive - Home\0_NLP\p1-texts\novels')):
+
     """Reads texts from a the specified directory of .txt files and returns a DataFrame with the text, title,
     author, and year"""
 
@@ -41,6 +44,7 @@ def read_novels(path=Path.cwd() / "p1-texts" / "novels"):
     
     # Get all  .txt files in the cwd
     txt_files = list(path.glob("*.txt"))
+    print(f"Found {len(txt_files)} .txt files: {[f.name for f in txt_files]}")
 
     for file_path in txt_files:
         try:
@@ -63,14 +67,14 @@ def read_novels(path=Path.cwd() / "p1-texts" / "novels"):
                 texts.append(text_content)
                 titles.append(title)
                 authors.append(author)
-                years.append(year_str)
+                years.append(year)
 
             else:
                 print(f"Error: Filename '{filename}' not in format (title-author-year)")
-
+            
         except Exception as e:
-            print(f"Error processing file '{file_path}: {e}")
-    df = pd.dataFrame({
+            print(f"Error processing file '{file_path}': {e}")
+    df = pd.DataFrame({
         "text": texts,
         "title": titles,
         "author": authors,
@@ -81,8 +85,7 @@ def read_novels(path=Path.cwd() / "p1-texts" / "novels"):
     return df
 
 
-
-pass 
+    #pass 
 
 def fk_level(text, d):
     """Returns the Flesch-Kincaid Grade Level of a text (higher grade is more difficult).
@@ -168,10 +171,16 @@ if __name__ == "__main__":
     """
     uncomment the following lines to run the functions once you have completed them
     """
-    #path = Path.cwd() / "p1-texts" / "novels"
-    #print(path)
-    #df = read_novels(path) # this line will fail until you have completed the read_novels function above.
-    #print(df.head())
+    path = Path.cwd() / "p1-texts" / "novels"
+    print(path)
+    df = read_novels(path) # this line will fail until you have completed the read_novels function above.
+    print(df.head())
+
+
+    print(df.head())     # First 5 rows
+    print(df.head(3))    # First 3 rows
+    print(df.shape)
+
     #nltk.download("cmudict")
     #parse(df)
     #print(df.head())
