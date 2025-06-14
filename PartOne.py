@@ -13,8 +13,8 @@ nlp = spacy.load("en_core_web_sm")      #load spacy pre-trained model
 nlp.max_length = 2000000
 
 
-# Determine the directory containing the .txt files - path to the txt file
-directory_path = r'C:\Users\ClaudiaRoehn\Desktop\New folder\OneDrive - Home\0_NLP\p1-texts\novels'
+# # Determine the directory containing the .txt files - path to the txt file
+# directory_path = r'C:\Users\ClaudiaRoehn\Desktop\New folder\OneDrive - Home\0_NLP\p1-texts\novels'
 
 # print("contents of directory:")                     #quick test/check to see content of directory and if all txt
 # try:
@@ -56,6 +56,9 @@ def read_novels(path=Path.cwd() / "p1-texts" / "novels"):
                 title = parts[0].strip().replace("_", " ")
                 author = parts[1].strip().replace("_", " ")
                 year_str = parts[2].strip().replace("_", " ")
+
+                # Convert year to integer
+                year = int(year_str)                
 
                 texts.append(text_content)
                 titles.append(title)
