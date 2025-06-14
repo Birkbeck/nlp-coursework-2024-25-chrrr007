@@ -7,7 +7,7 @@ import spacy
 import os
 import glob
 from pathlib import Path
-
+import pandas
 
 nlp = spacy.load("en_core_web_sm")      #load spacy pre-trained model
 nlp.max_length = 2000000
@@ -16,17 +16,71 @@ nlp.max_length = 2000000
 # Determine the directory containing the .txt files - path to the txt file
 directory_path = r'C:\Users\ClaudiaRoehn\Desktop\New folder\OneDrive - Home\0_NLP\p1-texts\novels'
 
-print("contents of directory:")                     #quick test/check to see content of directory
-try:
-    files = os.listdir(directory_path)
-    for i, file in enumerate(files, 1):
-        file_path = os.path.join(directory_path, file)
-        is_file = os.path.isfile(file_path)
-        file_size = os.path.getsize(file_path) if is_file else "N/A"
-        print(f"{i}. {file} ({'File' if is_file else 'Directory'}) - Size: {file_size} bytes")
-except FileNotFoundError:
-    print("Directory not found!")
+# print("contents of directory:")                     #quick test/check to see content of directory and if all txt
+# try:
+#     files = os.listdir(directory_path)
+#     for i, file in enumerate(files, 1):
+#         file_path = os.path.join(directory_path, file)
+#         is_file = os.path.isfile(file_path)
+#         file_size = os.path.getsize(file_path) if is_file else "N/A"
+#         print(f"{i}. {file} ({'File' if is_file else 'Directory'}) - Size: {file_size} bytes")
+# except FileNotFoundError:
+#     print("Directory not found!")
 
+
+# Part One 1(a): Read the contents of each .txt file
+def read_novels(path=Path.cwd() / "p1-texts" / "novels"):
+    """Reads texts from a the specified directory of .txt files and returns a DataFrame with the text, title,
+    author, and year"""
+
+# Create lists to store data for df
+    texts = []
+    titles = []
+    authors = []
+    years = []
+    
+    # Get all  .txt files in the cwd
+    txt_files = list(path.glob("*.txt"))
+
+    for file_path in txt_files:
+        try:
+            with open (file_path, 'r', encoding='utf-8') as file:
+                text_content = file.read()                            # Read entire file content
+            #print(f"Contents of {txt_file}:\n{content}\n")         # Print the content
+    
+            filename = file_path.stem   # removes .txt, keeps only part from path we need
+
+            parts = filename.split('-')
+
+            if len(parts) >= 3:
+                title = parts[0].strip().replace("_", " ")
+                author = parts[1].strip().replace("_", " ")
+                year_str = parts[2].strip().replace("_", " ")
+
+                texts.append(text_content)
+                titles.append(title)
+                authors.append(author)
+                years.append(year_str)
+
+            else:
+                print(f"Error: Filename '{filename}' not in format (title-author-year)")
+
+        except Exception as e:
+            print(f"Error processing file '{file_path}: {e}")
+    df = pd.dataFrame({
+        "text": texts,
+        "title": titles,
+        "author": authors,
+        "year": years
+    })    
+    
+    df = df.sort_values("year").reset_index(drop=True)
+        
+    return df
+
+
+
+pass 
 
 def fk_level(text, d):
     """Returns the Flesch-Kincaid Grade Level of a text (higher grade is more difficult).
