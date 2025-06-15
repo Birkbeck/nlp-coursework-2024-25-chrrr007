@@ -58,7 +58,81 @@ def read_novels(path):
     df = df.sort_values("year").reset_index(drop=True) 
     return df
 
+#----------------------------
 
+#Part One 1.(b)- WORK ON THIS!
+def nltk_ttr(text):
+#     """Calculates the type-token ratio of a text. Text is tokenized using nltk.word_tokenize."""
+
+    tokens= nltk.word_tokenize(text)
+    # Get tokens, filtering out punctuation and spaces
+    filtered_tokens = []
+    
+    for token in tokens:
+        if tokens .isalpha() and not token.isspace():
+            filtered_tokens.append(token.lower())
+
+    # Calculate TTR
+    if len(filtere_tokens)> 0:
+        types = set(filtered_tokens)
+        ttr =  len(types)/len(filtered_tokens)
+        return ttr
+    else:
+        return 0
+    
+def get_ttrs(df):
+    results = {}
+    for i, row in df.iterrows():
+        results[row["title"]] = nltk_ttr(row["test"])
+    return results
+
+def calculate_ttr_dict(path=Path.cwd() / "p1-texts" / "novels"):
+    ttr_dict ={}
+
+    txt_files = list(path.glob("*.txt"))
+
+
+    # Process each text file
+    for txt_file in txt_files:
+        try:
+            with open(txt_file, 'r', encoding='utf-8') as file:
+                content = file.read()
+        
+            # Get filename without path for display
+            filename = os.path.basename(txt_file)
+
+            #get filenames before hyphen
+            title = filename = filename.split("-")[0].replace("_", "")
+        
+            # Calculate TTR using NLTK
+            ttr = nltk_ttr(content)
+
+            ttr_dict[title]=ttr
+ 
+
+        except Exception as e:
+            print(f"Error processing {txt_file}: {e}")
+
+
+    return ttr_dict
+    
+
+
+# # Save results to a CSV file
+# import csv
+# results_file = os.path.join(directory_path, 'TTR_results.csv')
+# with open(results_file, 'w', newline='') as csvfile:
+#     writer = csv.writer(csvfile)
+#     writer.writerow(['Filename', 'TTR', 'Types', 'Tokens'])
+    
+#     for txt_file in txt_files:
+#         with open(txt_file, 'r', encoding='utf-8') as file:
+#             content = file.read()
+#         filename = os.path.basename(txt_file)
+#         ttr, types, tokens = calculate_ttr(content)
+#         writer.writerow([filename, f"{ttr:.4f}", types, tokens])
+    
+# print(f"\nResults saved to {results_file}")
 
 
 
@@ -76,7 +150,19 @@ def main():
     # print(df.head(3))    # First 3 rows
     # print(df.shape)
 
-
+    try:
+        nltk.data.find('tokenizers/punkt')
+    except LookupError:
+        nltk.download('punkt')
+    
+    # Calculate TTR for all novels
+    ttr_results = calculate_ttr_dict()
+    
+    # Display results
+    print("Novel TTR Results:")
+    print("-" * 50)
+    for title, ttr in ttr_results.items():
+        print(f"{title:<30}: {ttr:.4f}")
 
 
 
