@@ -88,9 +88,60 @@ def read_novels(path):
 
 
 
-# def nltk_ttr(text):
-#     """Calculates the type-token ratio of a text. Text is tokenized using nltk.word_tokenize."""
+def nltk_ttr(text):
+    """Calculates the type-token ratio of a text. Text is tokenized using nltk.word_tokenize."""
 
+    tokens= nltk.word_tokenize(text)
+    # Get tokens, filtering out punctuation and spaces
+    filtered_tokens = []
+    
+    for token in tokens:
+        if token .isalpha() and not token.isspace():
+            filtered_tokens.append(token.lower())
+
+    # Calculate TTR
+    if len(filtered_tokens)> 0:
+        types = set(filtered_tokens)
+        ttr =  len(types)/len(filtered_tokens)
+        return ttr
+    else:
+        return 0
+    
+def get_ttrs(df):
+    results = {}
+    for i, row in df.iterrows():
+        results[row["title"]] = nltk_ttr(row["text"])
+    return results
+
+def calculate_ttr_dict(path=Path.cwd() / "p1-texts" / "novels"):
+    ttr_dict ={}
+
+    txt_files = list(path.glob("*.txt"))
+    print(f"Found {len(txt_files)} files to process")
+
+    # Process each text file
+    for txt_file in txt_files:
+        try:
+            with open(txt_file, 'r', encoding='utf-8') as file:
+                content = file.read()
+        
+            # Get filename without path for display
+            filename = os.path.basename(txt_file)
+
+            #get filenames before hyphen
+            title = filename = filename.split("-")[0]   #.replace("_", "")
+        
+            # Calculate TTR using NLTK
+            ttr = nltk_ttr(content)
+
+            ttr_dict[title]=ttr
+            print(f"Processed: {title} -> TTR: {ttr:.4f}")
+
+        except Exception as e:
+            print(f"Error processing {txt_file}: {e}")
+
+    print(f"Total entries in dictionary: {len(ttr_dict)}")  # to check as it didn't work 
+    return ttr_dict
 
 
 # def get_ttrs(df):

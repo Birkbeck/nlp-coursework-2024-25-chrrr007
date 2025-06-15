@@ -60,7 +60,7 @@ def read_novels(path):
 
 #----------------------------
 
-#Part One 1.(b)- WORK ON THIS!
+#Part One 1.(b)
 def nltk_ttr(text):
 #     """Calculates the type-token ratio of a text. Text is tokenized using nltk.word_tokenize."""
 
