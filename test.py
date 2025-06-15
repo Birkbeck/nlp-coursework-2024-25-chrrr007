@@ -134,7 +134,7 @@ def count_syl(word, d):
     """
     word = word.lower()
     if word in d:
-        return len(phoneme for phoneme in d[word][0] if phoneme[-1].isdigit())
+        return len([phoneme for phoneme in d[word][0] if phoneme[-1].isdigit()])
     else:
         vowels = "aeiouy"
         syllables = 0
@@ -143,8 +143,8 @@ def count_syl(word, d):
             is_vowel = char.lower() in  vowels
             if is_vowel and not prev_was_vowel:
                 syllables +=1
-                prev_was_vowel = is_vowel
-            return max(1, syllables)
+            prev_was_vowel = is_vowel
+        return max(1, syllables)
 
 def fk_level(text, d):
     """Returns the Flesch-Kincaid Grade Level of a text (higher grade is more difficult).
@@ -158,7 +158,7 @@ def fk_level(text, d):
         float: The Flesch-Kincaid Grade Level of the text. (higher grade is more difficult)
     """
     sentences = nltk.sent_tokenize(text)
-    tokens = nltk.sent_tokenize(text)
+    tokens = nltk.word_tokenize(text)
 
     filtered_tokens = []
     for token in tokens:
@@ -170,14 +170,22 @@ def fk_level(text, d):
 
     avg_sentence_length = len(filtered_tokens)/len(sentences)
 
+    total_syllables=0
     for word in filtered_tokens:
-        total_syllables=sum(count_syl(word, d))
+        total_syllables += count_syl(word, d)
 
     avg_syllables_per_word=total_syllables/len(filtered_tokens)
 
     grade_level = (0.39 * avg_sentence_length) + (11.8 * avg_syllables_per_word) - 15.59
  
+    # print(f"Sentences: {len(sentences)}")                         #got weird FK-scores added as a check to see if those numbers are in expected range
+    # print(f"Filtered tokens: {len(filtered_tokens)}")
+    # print(f"Avg sentence length: {avg_sentence_length}")
+    # print(f"Total syllables: {total_syllables}")
+    # print(f"Avg syllables per word: {avg_syllables_per_word}")
+
     return grade_level
+    
 
 def get_fks(df):
     """helper function to add fk scores to a dataframe"""
