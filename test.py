@@ -10,12 +10,12 @@ import csv
 nlp = spacy.load("en_core_web_sm")      #load spacy pre-trained model
 nlp.max_length = 2000000
 
-#Part One 1.(a)(i):
+# Part One 1.(a)(i):
 def read_novels(path):
     #txt_files = list(path.glob("*.txt"))
     all_files = list(path.glob("*.*"))
     txt_files= list(path.glob("*.txt"))    
-    print(f"Files with any extension: {[f.name for f in all_files]}")
+    print(f"Files with any extension: {[f.name for f in all_files]}\n")
 
     texts = []
     titles = []
@@ -94,7 +94,7 @@ def calculate_ttr_dict(path=Path.cwd() / "p1-texts" / "novels"):
     ttr_dict ={}
 
     txt_files = list(path.glob("*.txt"))
-    print(f"Found {len(txt_files)} files to process")
+    print(f"Found {len(txt_files)} files to process:")
 
     # Process each text file
     for txt_file in txt_files:
@@ -117,7 +117,7 @@ def calculate_ttr_dict(path=Path.cwd() / "p1-texts" / "novels"):
         except Exception as e:
             print(f"Error processing {txt_file}: {e}")
 
-    print(f"Total entries in dictionary: {len(ttr_dict)}")  # to check as it didn't work 
+    print(f"Total entries in dictionary: {len(ttr_dict)}\n")  # to check as it didn't work 
     return ttr_dict
     
 #----------------------------    
@@ -205,9 +205,10 @@ def parse_texts(df):
     Process texts with spaCy's tokenizer and parser, and store the processed texts.
     Use spaCy nlp method to add new column to the dataframe that contains parsed and tokenized Doc objects.
     """
-
-    df['parsed'] = df['text'].apply(nlp)  # nlp is your loaded spaCy model
+    print(f"Processing {len(df)} texts with spaCy...")
+    df['parsed'] = df['text'].apply(nlp)        
     
+    print("spaCy processing complete! \n")         # thougt it's useful to see when process finished
     return df
 
 
@@ -227,9 +228,11 @@ def main():
 # Part One 1.(a)(i) & (ii)
 
     path = Path.cwd() / "p1-texts" / "novels"
-    #print(path)
+    print(path)
+    print()
     df=read_novels(path)
     print(df.head())
+    print()
 
     
 
@@ -237,18 +240,25 @@ def main():
    
     # Calculate TTR for all novels
     ttr_results = calculate_ttr_dict()
+    print(f"TTRs:")
     print(get_ttrs(df))
+    print()
 
     
-    # Display results formated to get cleaner view
-    print("Novel TTR Results:")
-    print("-" * 50)
-    for title, ttr in ttr_results.items():
-        print(f"{title:<30}: {ttr:.4f}")
+    # # Shows results formated / cleaner view
+    # print("Novel TTR Results:")
+    # print("-" * 50)
+    # for title, ttr in ttr_results.items():
+    #     print(f"{title:<30}: {ttr:.4f}")
 
 # Part One 1.(c)
+    print(f"Flesch_Kincaide_scores:")
     print(get_fks(df))
+    print()
 
+# Part One 1.(e)(i)
+
+    df_parsed = parse_texts(df) # to add parsed column to existing df
 
 
 if __name__ == "__main__":

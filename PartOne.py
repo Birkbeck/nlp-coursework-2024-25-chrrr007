@@ -87,7 +87,7 @@ def read_novels(path):
     return df
 
    
-#def nltk_ttr(text):            -DONE!-
+#def nltk_ttr(text):            -DONE!- Part One 1.(b):
 #     """Calculates the type-token ratio of a text. Text is tokenized using nltk.word_tokenize."""
 
 
@@ -99,7 +99,7 @@ def read_novels(path):
 #     return results
 
 
-# def fk_level(text, d):        -DONE!-
+# def fk_level(text, d):        -DONE!- Part One 1.(c):
 #     """Returns the Flesch-Kincaid Grade Level of a text (higher grade is more difficult).
 #     Requires a dictionary of syllables per word.
 
@@ -113,7 +113,7 @@ def read_novels(path):
 #     pass
 
 
-# def count_syl(word, d):        -DONE!-
+# def count_syl(word, d):        -DONE!- Part One 1.(c):
 #     """Counts the number of syllables in a word given a dictionary of syllables per word.
 #     if the word is not in the dictionary, syllables are estimated by counting vowel clusters
 
@@ -137,7 +137,7 @@ def read_novels(path):
 
 
 
-# def get_fks(df):        -DONE!-
+# def get_fks(df):        -DONE!- # Part One 1.(c):
 #     """helper function to add fk scores to a dataframe"""
 #     results = {}
 #     cmudict = nltk.corpus.cmudict.dict()
@@ -168,24 +168,24 @@ def main():
     uncomment the following lines to run the functions once you have completed them
     """
 
-    # path = Path.cwd() / "p1-texts" / "novels"             -DONE!-
-    # print(path)                                           -DONE!-
-    # df = read_novels(path) # this line will fail until you have completed the read_novels function above.    -DONE!-
-    # print(df.head())                                      -DONE!-
+    # path = Path.cwd() / "p1-texts" / "novels"             -DONE!- Part One 1.(a)(i) & (ii)
+    # print(path)                                           -DONE!- Part One 1.(a)(i) & (ii)
+    # df = read_novels(path) # this line will fail until you have completed the read_novels function above.    -DONE!- Part One 1.(a)(i) & (ii)
+    # print(df.head())                                      -DONE!- Part One 1.(a)(i) & (ii)
 
 
 
     
-    #all_files = list(path.glob("*.*"))                     -DONE!-
-    #all_files= list(path.glob("*.txt"))                    -DONE!-
-    #print(f"Files with any extension: {[f.name for f in all_files]}")     -DONE!-
+    #all_files = list(path.glob("*.*"))                                    -DONE!- Part One 1.(a)(i):
+    #all_files= list(path.glob("*.txt"))                                   -DONE!- Part One 1.(a)(i):
+    #print(f"Files with any extension: {[f.name for f in all_files]}")     -DONE!- Part One 1.(a)(i):
     
 
-    #nltk.download("cmudict")                             -DONE!-
-    #parse(df)
-    #print(df.head())                                     -DONE!-
-    #print(get_ttrs(df))                                  -DONE!-
-    #print(get_fks(df))                                   -DONE!-
+    #nltk.download("cmudict")                             -DONE!- Part One 1.(b):
+    #parse(df)                                            -DONE!- Part One 1.(e)(i)
+    #print(df.head())                                     -DONE!- Part One 1.(a)(i) & (ii)
+    #print(get_ttrs(df))                                  -DONE!- Part One 1.(b):
+    #print(get_fks(df))                                   -DONE!- Part One 1.(c):
 
     #df = pd.read_pickle(Path.cwd() / "pickles" /"name.pickle")
     # print(adjective_counts(df))
