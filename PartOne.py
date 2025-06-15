@@ -30,7 +30,7 @@ nlp.max_length = 2000000
 
 # Part One 1(a): Read the contents of each .txt file
 
-# def read_novels(path=Path.cwd() / "p1-texts" / "novels"):
+# def read_novels(path=Path.cwd() / "p1-texts" / "novels"):      -DONE!-
 def read_novels(path):
     # def read_novels(path=Path(r'C:\Users\ClaudiaRoehn\Desktop\New folder\OneDrive - Home\0_NLP\p1-texts\novels')):
 
@@ -87,10 +87,11 @@ def read_novels(path):
     return df
 
    
+#def nltk_ttr(text):        -DONE!-
+#     """Calculates the type-token ratio of a text. Text is tokenized using nltk.word_tokenize."""
 
 
-
-# def get_ttrs(df):
+# def get_ttrs(df):         -DONE!-
 #     """helper function to add ttr to a dataframe"""
 #     results = {}
 #     for i, row in df.iterrows():
@@ -167,10 +168,12 @@ def main():
     uncomment the following lines to run the functions once you have completed them
     """
 
-    path = Path.cwd() / "p1-texts" / "novels"
-    print(path)
-    df = read_novels(path) # this line will fail until you have completed the read_novels function above.
-    print(df.head())
+    # path = Path.cwd() / "p1-texts" / "novels"             -DONE!-
+    # print(path)                                           -DONE!-
+    # df = read_novels(path) # this line will fail until you have completed the read_novels function above.    -DONE!-
+    # print(df.head())                                      -DONE!-
+
+
 
     
     #all_files = list(path.glob("*.*"))
@@ -180,8 +183,8 @@ def main():
 
     #nltk.download("cmudict")
     #parse(df)
-    #print(df.head())
-    #print(get_ttrs(df))
+    #print(df.head())                                     -DONE!-
+    #print(get_ttrs(df))                                  -DONE!-
     #print(get_fks(df))
     #df = pd.read_pickle(Path.cwd() / "pickles" /"name.pickle")
     # print(adjective_counts(df))

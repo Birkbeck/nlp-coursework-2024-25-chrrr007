@@ -138,9 +138,7 @@ def main():
     
     # Calculate TTR for all novels
     ttr_results = calculate_ttr_dict()
-
-    print(type(ttr_results))  # To check output being a dictionary
-    print(ttr_results) 
+    print(get_ttrs(df))
 
     
     # Display results formated to get cleaner view
