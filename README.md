@@ -27,6 +27,11 @@ DF aftr sorting by year:
 
 
 Result output: Part One 1.(b):
+
+```<class 'dict'>
+{'A_Tale_of_Two_Cities': 0.07072694469399422, 'Blood_Meridian': 0.08568897067593587, 'Dorian_Gray': 0.08355234620193412, 'Erewhon': 0.09151270564132943, 'North_and_South': 0.0549040694681204, 'Orlando': 0.1137245917497168, 'Portrait_of_the_Artist': 0.10472745625841184, 'Sense_and_Sensibility': 0.052847302442989776, 'Tess_of_the_DUrbervilles': 0.07778957979554696, 'The_American': 0.06381607058523676, 'The_Black_Moth': 0.07866588875923765, 'The_Golden_Bowl': 0.047475476259872806, 'The_Secret_Garden': 0.05847231570812455}
+```
+
 Novel TTR Results:
 --------------------------------------------------
 A_Tale_of_Two_Cities          : 0.0707
