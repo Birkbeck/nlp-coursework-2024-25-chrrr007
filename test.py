@@ -132,10 +132,19 @@ def count_syl(word, d):
     Returns:
         int: The number of syllables in the word.
     """
-
-
-
-
+    word = word.lower()
+    if word in d:
+        return len(phoneme for phoneme in d[word][0] if phoneme[-1].isdigit()])
+    else:
+        vowels = "aeiouy"
+        syllables = 0
+        prev_was_vowel = False
+        for char in word:
+            is_vowel = char.lower() in  vowels
+            if is_vowel and not prev_was_vowel:
+                syllables +=1
+                prev_was_vowel = is_vowel
+            return max(1, syllables)
 
 def fk_level(text, d):
     """Returns the Flesch-Kincaid Grade Level of a text (higher grade is more difficult).
@@ -150,6 +159,16 @@ def fk_level(text, d):
     """
 
 
+
+
+
+# def get_fks(df):
+#     """helper function to add fk scores to a dataframe"""
+#     results = {}
+#     cmudict = nltk.corpus.cmudict.dict()
+#     for i, row in df.iterrows():
+#         results[row["title"]] = round(fk_level(row["text"], cmudict), 4)
+#     return results
 
 
 #----------------------------
