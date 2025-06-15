@@ -134,7 +134,7 @@ def count_syl(word, d):
     """
     word = word.lower()
     if word in d:
-        return len(phoneme for phoneme in d[word][0] if phoneme[-1].isdigit()])
+        return len(phoneme for phoneme in d[word][0] if phoneme[-1].isdigit())
     else:
         vowels = "aeiouy"
         syllables = 0
@@ -165,10 +165,10 @@ def fk_level(text, d):
         if token.isalpha() and not token.isspace():
             filtered_tokens.append(token.lower())
 
-    if len(sentences) == 0 or len(filtered_tokens) ==0:
+    if len(sentences)== 0 or len(filtered_tokens) ==0:
         return 0
 
-    avg_sentence_legth = len(filtered_tokens)/len(sentences)
+    avg_sentence_length = len(filtered_tokens)/len(sentences)
 
     for word in filtered_tokens:
         total_syllables=sum(count_syl(word, d))
