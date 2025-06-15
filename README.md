@@ -26,3 +26,19 @@ DF aftr sorting by year:
 4  THE AMERICAN\n\nby Henry James\n\n\n1877\n\n\n...           The American    James  1877
 
 
+Result output: Part One 1.(b):
+Novel TTR Results:
+--------------------------------------------------
+A_Tale_of_Two_Cities          : 0.0707
+Blood_Meridian                : 0.0857
+Dorian_Gray                   : 0.0836
+Erewhon                       : 0.0915
+North_and_South               : 0.0549
+Orlando                       : 0.1137
+Portrait_of_the_Artist        : 0.1047
+Sense_and_Sensibility         : 0.0528
+Tess_of_the_DUrbervilles      : 0.0778
+The_American                  : 0.0638
+The_Black_Moth                : 0.0787
+The_Golden_Bowl               : 0.0475
+The_Secret_Garden             : 0.0585
