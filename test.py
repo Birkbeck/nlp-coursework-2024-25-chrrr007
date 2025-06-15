@@ -10,9 +10,11 @@ import csv
 
 #Part One 1.(a)(i)
 def read_novels(path):
-    txt_files = list(path.glob("*.txt"))
-    #print(f"Files with any extension: {[f.name for f in txt_files]}")
-    
+    #txt_files = list(path.glob("*.txt"))
+    all_files = list(path.glob("*.*"))
+    txt_files= list(path.glob("*.txt"))    
+    print(f"Files with any extension: {[f.name for f in all_files]}")
+
     texts = []
     titles = []
     authors = []
@@ -145,6 +147,8 @@ def main():
     #print(path)
     df=read_novels(path)
     print(df.head())
+
+    
 
 # Part One 1.(b)
    

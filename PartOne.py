@@ -176,9 +176,9 @@ def main():
 
 
     
-    #all_files = list(path.glob("*.*"))
-    #all_files= list(path.glob("*.txt"))
-    #print(f"Files with any extension: {[f.name for f in all_files]}")
+    #all_files = list(path.glob("*.*"))                     -DONE!-
+    #all_files= list(path.glob("*.txt"))                    -DONE!-
+    #print(f"Files with any extension: {[f.name for f in all_files]}")            -DONE!-
     
 
     #nltk.download("cmudict")                             -DONE!-
