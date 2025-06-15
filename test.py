@@ -7,8 +7,10 @@ from pathlib import Path
 import pandas as pd
 import csv
 
+nlp = spacy.load("en_core_web_sm")      #load spacy pre-trained model
+nlp.max_length = 2000000
 
-#Part One 1.(a)(i)
+#Part One 1.(a)(i):
 def read_novels(path):
     #txt_files = list(path.glob("*.txt"))
     all_files = list(path.glob("*.*"))
@@ -62,7 +64,7 @@ def read_novels(path):
 
 #----------------------------
 
-#Part One 1.(b)
+#Part One 1.(b):
 def nltk_ttr(text):
 #     """Calculates the type-token ratio of a text. Text is tokenized using nltk.word_tokenize."""
 
@@ -119,7 +121,7 @@ def calculate_ttr_dict(path=Path.cwd() / "p1-texts" / "novels"):
     return ttr_dict
     
 #----------------------------    
-# Part One 1.(c)
+# Part One 1.(c):
 
 def count_syl(word, d):
     """Counts the number of syllables in a word given a dictionary of syllables per word.
@@ -194,6 +196,19 @@ def get_fks(df):
     for i, row in df.iterrows():
         results[row["title"]] = round(fk_level(row["text"], cmudict), 4)
     return results
+
+#----------------------------    
+# Part One 1.(e)(i):
+
+def parse_texts(df):
+    """
+    Process texts with spaCy's tokenizer and parser, and store the processed texts.
+    Use spaCy nlp method to add new column to the dataframe that contains parsed and tokenized Doc objects.
+    """
+
+    df['parsed'] = df['text'].apply(nlp)  # nlp is your loaded spaCy model
+    
+    return df
 
 
 #----------------------------
