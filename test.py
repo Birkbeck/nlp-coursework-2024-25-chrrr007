@@ -157,18 +157,35 @@ def fk_level(text, d):
     Returns:
         float: The Flesch-Kincaid Grade Level of the text. (higher grade is more difficult)
     """
+    sentences = nltk.sent_tokenize(text)
+    tokens = nltk.sent_tokenize(text)
 
+    filtered_tokens = []
+    for token in tokens:
+        if token.isalpha() and not token.isspace():
+            filtered_tokens.append(token.lower())
 
+    if len(sentences) == 0 or len(filtered_tokens) ==0:
+        return 0
 
+    avg_sentence_legth = len(filtered_tokens)/len(sentences)
 
+    for word in filtered_tokens:
+        total_syllables=sum(count_syl(word, d))
 
-# def get_fks(df):
-#     """helper function to add fk scores to a dataframe"""
-#     results = {}
-#     cmudict = nltk.corpus.cmudict.dict()
-#     for i, row in df.iterrows():
-#         results[row["title"]] = round(fk_level(row["text"], cmudict), 4)
-#     return results
+    avg_syllables_per_word=total_syllables/len(filtered_tokens)
+
+    grade_level = (0.39 * avg_sentence_length) + (11.8 * avg_syllables_per_word) - 15.59
+ 
+    return grade_level
+
+def get_fks(df):
+    """helper function to add fk scores to a dataframe"""
+    results = {}
+    cmudict = nltk.corpus.cmudict.dict()
+    for i, row in df.iterrows():
+        results[row["title"]] = round(fk_level(row["text"], cmudict), 4)
+    return results
 
 
 #----------------------------
@@ -207,7 +224,7 @@ def main():
         print(f"{title:<30}: {ttr:.4f}")
 
 # Part One 1.(c)
-    #print(get_fks(df))
+    print(get_fks(df))
 
 
 
