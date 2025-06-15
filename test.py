@@ -116,20 +116,27 @@ def calculate_ttr_dict(path=Path.cwd() / "p1-texts" / "novels"):
     print(f"Total entries in dictionary: {len(ttr_dict)}")  # to check as it didn't work 
     return ttr_dict
     
+#----------------------------    
+# Part One 1.(c)
 
 
 
 
 
+
+
+
+#----------------------------
 def main():
 
+# Part One 1.(a)(i) & (ii)
 
     path = Path.cwd() / "p1-texts" / "novels"
     #print(path)
     df=read_novels(path)
     print(df.head())
 
-    # print(df.shape)
+# Part One 1.(b)
 
     try:
         nltk.data.find('tokenizers/punkt')
@@ -146,6 +153,8 @@ def main():
     print("-" * 50)
     for title, ttr in ttr_results.items():
         print(f"{title:<30}: {ttr:.4f}")
+
+# Part One 1.(c)
 
 
 
