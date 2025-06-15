@@ -87,11 +87,11 @@ def read_novels(path):
     return df
 
    
-#def nltk_ttr(text):        -DONE!-
+#def nltk_ttr(text):            -DONE!-
 #     """Calculates the type-token ratio of a text. Text is tokenized using nltk.word_tokenize."""
 
 
-# def get_ttrs(df):         -DONE!-
+# def get_ttrs(df):             -DONE!-
 #     """helper function to add ttr to a dataframe"""
 #     results = {}
 #     for i, row in df.iterrows():
@@ -99,7 +99,7 @@ def read_novels(path):
 #     return results
 
 
-# def fk_level(text, d):
+# def fk_level(text, d):        -DONE!-
 #     """Returns the Flesch-Kincaid Grade Level of a text (higher grade is more difficult).
 #     Requires a dictionary of syllables per word.
 
@@ -113,7 +113,7 @@ def read_novels(path):
 #     pass
 
 
-# def count_syl(word, d):
+# def count_syl(word, d):        -DONE!-
 #     """Counts the number of syllables in a word given a dictionary of syllables per word.
 #     if the word is not in the dictionary, syllables are estimated by counting vowel clusters
 
@@ -137,7 +137,7 @@ def read_novels(path):
 
 
 
-# def get_fks(df):
+# def get_fks(df):        -DONE!-
 #     """helper function to add fk scores to a dataframe"""
 #     results = {}
 #     cmudict = nltk.corpus.cmudict.dict()
@@ -178,14 +178,15 @@ def main():
     
     #all_files = list(path.glob("*.*"))                     -DONE!-
     #all_files= list(path.glob("*.txt"))                    -DONE!-
-    #print(f"Files with any extension: {[f.name for f in all_files]}")            -DONE!-
+    #print(f"Files with any extension: {[f.name for f in all_files]}")     -DONE!-
     
 
     #nltk.download("cmudict")                             -DONE!-
     #parse(df)
     #print(df.head())                                     -DONE!-
     #print(get_ttrs(df))                                  -DONE!-
-    #print(get_fks(df))
+    #print(get_fks(df))                                   -DONE!-
+
     #df = pd.read_pickle(Path.cwd() / "pickles" /"name.pickle")
     # print(adjective_counts(df))
 
