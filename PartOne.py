@@ -63,7 +63,7 @@ def read_novels(path):
                 author = parts[1].strip().replace("_", " ")
                 year_str = parts[2].strip().replace("_", " ")
 
-                # Convert year to integer
+                # Convert year to integer so that we can sort
                 year = int(year_str)                
 
                 texts.append(text_content)
@@ -83,14 +83,14 @@ def read_novels(path):
         "year": years
     })    
     
-    df = df.sort_values("year").reset_index(drop=True)          #re-sorting df to get soring by year
+    df = df.sort_values("year").reset_index(drop=True)          #re-sorting df to get required sorting by year
     return df
 
 
 
 # def nltk_ttr(text):
 #     """Calculates the type-token ratio of a text. Text is tokenized using nltk.word_tokenize."""
-#     pass
+
 
 
 # def get_ttrs(df):
