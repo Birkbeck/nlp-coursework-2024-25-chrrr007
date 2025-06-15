@@ -121,9 +121,33 @@ def calculate_ttr_dict(path=Path.cwd() / "p1-texts" / "novels"):
 #----------------------------    
 # Part One 1.(c)
 
+def count_syl(word, d):
+    """Counts the number of syllables in a word given a dictionary of syllables per word.
+    if the word is not in the dictionary, syllables are estimated by counting vowel clusters
+
+    Args:
+        word (str): The word to count syllables for.
+        d (dict): A dictionary of syllables per word.
+
+    Returns:
+        int: The number of syllables in the word.
+    """
 
 
 
+
+
+def fk_level(text, d):
+    """Returns the Flesch-Kincaid Grade Level of a text (higher grade is more difficult).
+    Requires a dictionary of syllables per word.
+
+    Args:
+        text (str): The text to analyze.
+        d (dict): A dictionary of syllables per word.
+
+    Returns:
+        float: The Flesch-Kincaid Grade Level of the text. (higher grade is more difficult)
+    """
 
 
 
@@ -164,7 +188,7 @@ def main():
         print(f"{title:<30}: {ttr:.4f}")
 
 # Part One 1.(c)
-
+    #print(get_fks(df))
 
 
 
