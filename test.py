@@ -69,11 +69,11 @@ def nltk_ttr(text):
     filtered_tokens = []
     
     for token in tokens:
-        if tokens .isalpha() and not token.isspace():
+        if token .isalpha() and not token.isspace():
             filtered_tokens.append(token.lower())
 
     # Calculate TTR
-    if len(filtere_tokens)> 0:
+    if len(filtered_tokens)> 0:
         types = set(filtered_tokens)
         ttr =  len(types)/len(filtered_tokens)
         return ttr
@@ -83,14 +83,14 @@ def nltk_ttr(text):
 def get_ttrs(df):
     results = {}
     for i, row in df.iterrows():
-        results[row["title"]] = nltk_ttr(row["test"])
+        results[row["title"]] = nltk_ttr(row["text"])
     return results
 
 def calculate_ttr_dict(path=Path.cwd() / "p1-texts" / "novels"):
     ttr_dict ={}
 
     txt_files = list(path.glob("*.txt"))
-
+    print(f"Found {len(txt_files)} files to process")
 
     # Process each text file
     for txt_file in txt_files:
@@ -102,37 +102,21 @@ def calculate_ttr_dict(path=Path.cwd() / "p1-texts" / "novels"):
             filename = os.path.basename(txt_file)
 
             #get filenames before hyphen
-            title = filename = filename.split("-")[0].replace("_", "")
+            title = filename = filename.split("-")[0]   #.replace("_", "")
         
             # Calculate TTR using NLTK
             ttr = nltk_ttr(content)
 
             ttr_dict[title]=ttr
- 
+            print(f"Processed: {title} -> TTR: {ttr:.4f}")
 
         except Exception as e:
             print(f"Error processing {txt_file}: {e}")
 
-
+    print(f"Total entries in dictionary: {len(ttr_dict)}")  # to check as it didn't work 
     return ttr_dict
     
 
-
-# # Save results to a CSV file
-# import csv
-# results_file = os.path.join(directory_path, 'TTR_results.csv')
-# with open(results_file, 'w', newline='') as csvfile:
-#     writer = csv.writer(csvfile)
-#     writer.writerow(['Filename', 'TTR', 'Types', 'Tokens'])
-    
-#     for txt_file in txt_files:
-#         with open(txt_file, 'r', encoding='utf-8') as file:
-#             content = file.read()
-#         filename = os.path.basename(txt_file)
-#         ttr, types, tokens = calculate_ttr(content)
-#         writer.writerow([filename, f"{ttr:.4f}", types, tokens])
-    
-# print(f"\nResults saved to {results_file}")
 
 
 

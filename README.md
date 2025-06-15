@@ -4,7 +4,7 @@ template for NLP module coursework
 
 Student ID: 
 
-Part One 1.(a)(i):
+Result output: Part One 1.(a)(i):
 DF before sorting by year:
 
                                                 text                 title    author  year
@@ -14,7 +14,8 @@ DF before sorting by year:
 3  SAMUEL BUTLER.\nAugust 7, 1901\n\nCHAPTER I: W...               Erewhon    Butler  1872
 4  'Wooed and married and a'.'\n'Edith!' said Mar...       North and South   Gaskell  1855
 
-Part One 1.(a)(ii):
+
+Result output: Part One 1.(a)(ii):
 
 DF aftr sorting by year:
                                                text                  title   author  year
@@ -23,3 +24,5 @@ DF aftr sorting by year:
 2  Book the First--Recalled to Life\n\n\n\n\nI. T...   A Tale of Two Cities  Dickens  1858
 3  SAMUEL BUTLER.\nAugust 7, 1901\n\nCHAPTER I: W...                Erewhon   Butler  1872
 4  THE AMERICAN\n\nby Henry James\n\n\n1877\n\n\n...           The American    James  1877
+
+
