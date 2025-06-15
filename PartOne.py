@@ -187,7 +187,7 @@ def main():
     #print(get_ttrs(df))                                  -DONE!- Part One 1.(b):
     #print(get_fks(df))                                   -DONE!- Part One 1.(c):
 
-    #df = pd.read_pickle(Path.cwd() / "pickles" /"name.pickle")            
+    #df = pd.read_pickle(Path.cwd() / "pickles" /"name.pickle")            -DONE!- Part One 1.(e)(iv)
     # print(adjective_counts(df))
 
     # """ 

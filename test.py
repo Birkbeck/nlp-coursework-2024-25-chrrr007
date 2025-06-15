@@ -271,6 +271,7 @@ def main():
     df_parsed = parse_texts(df) # to add parsed column to existing df
 
 
+
 if __name__ == "__main__":
     main()
     
