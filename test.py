@@ -6,6 +6,7 @@ import glob
 from pathlib import Path
 import pandas as pd
 import csv
+import pickle
 
 nlp = spacy.load("en_core_web_sm")      #load spacy pre-trained model
 nlp.max_length = 2000000
@@ -208,8 +209,17 @@ def parse_texts(df):
     print(f"Processing {len(df)} texts with spaCy...")
     df['parsed'] = df['text'].apply(nlp)        
     
-    print("spaCy processing complete! \n")         # thougt it's useful to see when process finished
+    print("spaCy processing finished! \n")         # thougt it's useful to see when process finished
     return df
+
+#----------------------------    
+# Part One 1.(e)(ii):
+def parse(df, store_path=Path.cwd() / "pickles", out_name="parsed.pickle"):
+    """
+    Parses the text of a DataFrame using spaCy, stores the parsed docs as a column and writes 
+    the resulting  DataFrame to a pickle file"""
+
+
 
 
 #----------------------------

@@ -130,7 +130,7 @@ def read_novels(path):
 
 
 
-# def parse(df, store_path=Path.cwd() / "pickles", out_name="parsed.pickle"): (e)ii
+# def parse(df, store_path=Path.cwd() / "pickles", out_name="parsed.pickle"): -DONE!- Part One(e)ii
 #     """Parses the text of a DataFrame using spaCy, stores the parsed docs as a column and writes 
 #     the resulting  DataFrame to a pickle file"""
 #     pass
@@ -187,7 +187,7 @@ def main():
     #print(get_ttrs(df))                                  -DONE!- Part One 1.(b):
     #print(get_fks(df))                                   -DONE!- Part One 1.(c):
 
-    #df = pd.read_pickle(Path.cwd() / "pickles" /"name.pickle")
+    #df = pd.read_pickle(Path.cwd() / "pickles" /"name.pickle")            
     # print(adjective_counts(df))
 
     # """ 
