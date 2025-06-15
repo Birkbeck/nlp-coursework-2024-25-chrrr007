@@ -129,9 +129,6 @@ def main():
     df=read_novels(path)
     print(df.head())
 
-    
-    # print(df.head())     # First 5 rows
-    # print(df.head(3))    # First 3 rows
     # print(df.shape)
 
     try:
