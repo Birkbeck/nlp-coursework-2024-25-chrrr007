@@ -129,6 +129,16 @@ def calculate_ttr_dict(path=Path.cwd() / "p1-texts" / "novels"):
 #----------------------------
 def main():
 
+    try:
+        nltk.data.find('tokenizers/punkt')
+    except LookupError:
+        nltk.download('punkt')
+
+    try:
+        nltk.data.find('corpora/cmudict')
+    except LookupError:
+        nltk.download('cmudict')    
+
 # Part One 1.(a)(i) & (ii)
 
     path = Path.cwd() / "p1-texts" / "novels"
@@ -137,12 +147,7 @@ def main():
     print(df.head())
 
 # Part One 1.(b)
-
-    try:
-        nltk.data.find('tokenizers/punkt')
-    except LookupError:
-        nltk.download('punkt')
-    
+   
     # Calculate TTR for all novels
     ttr_results = calculate_ttr_dict()
     print(get_ttrs(df))
