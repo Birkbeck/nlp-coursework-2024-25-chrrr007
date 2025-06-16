@@ -91,7 +91,7 @@ def read_novels(path):
 #     """Calculates the type-token ratio of a text. Text is tokenized using nltk.word_tokenize."""
 
 
-# def get_ttrs(df):             -DONE!-
+# def get_ttrs(df):             -DONE!- - Part One 1.(b):
 #     """helper function to add ttr to a dataframe"""
 #     results = {}
 #     for i, row in df.iterrows():

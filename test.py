@@ -219,7 +219,27 @@ def parse(df, store_path=Path.cwd() / "pickles", out_name="parsed.pickle"):
     Parses the text of a DataFrame using spaCy, stores the parsed docs as a column and writes 
     the resulting  DataFrame to a pickle file"""
 
+    print(f"Processing {len(df)} texts with spaCy...")
+    df['parsed'] = df['text'].apply(nlp)
+    print("spaCy processing finished! \n")
 
+    store_path.mkdir(exist_ok=True)
+    filepath =store_path/out_name
+    print(f"Serializing DataFrame to {filepath} \n")
+
+    with open(filepath, "wb") as f:
+        pickle.dump(df, f)
+
+    print(f"DataFrame saved as {out_name} \n")
+
+# Part One 1.(e)(iii):    
+    return df
+# #----------------------------    
+
+
+# # Part One 1.(e)(iv):
+
+# df = pd.read_pickle(Path.cwd() / "pickles" /"name.pickle")        #load Df from pickle
 
 
 #----------------------------
@@ -269,9 +289,18 @@ def main():
 # Part One 1.(e)(i)
 
     df_parsed = parse_texts(df) # to add parsed column to existing df
+# Part One 1.(e)(iii):   
+    print(df.head())
+    print()
 
+# # Part One 1.(e)(iv): 
+#     print(f"Loaded DataFrame with {len(df)} texts")
+#     print(f"Columns: {list(df.columns)}")
+#     print(df.head())
 
 
 if __name__ == "__main__":
     main()
     
+
+   
