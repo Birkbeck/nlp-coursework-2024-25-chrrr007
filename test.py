@@ -243,31 +243,20 @@ def parse(df, store_path=Path.cwd() / "pickles", out_name="parsed.pickle"):
     
     print("Function ending...")  # confirmation for exceution - felt useful
 
-
-
-
 # Part One 1.(e)(iii):    
     return df
 # #----------------------------    
 
 
-# # Part One 1.(e)(iv):
+# # Part One 1.(f):
 
-# df = pd.read_pickle(Path.cwd() / "pickles" /"parsed.pickle")        #load Df from pickle
+from collections import Counter
 
-# pickles_dir = Path.cwd() / "pickles"
-# print(f"Pickles directory exists: {pickles_dir.exists()}")
 
-# # Check what's in the pickles directory
-# if pickles_dir.exists():
-#     print(f"Contents of pickles directory:")
-#     for file in pickles_dir.iterdir():
-#         print(f"  - {file.name}")
-# else:
-#     print("Pickles directory not found!")
+def adjective_counts(doc):             
+    """Extracts the most common adjectives in a parsed document. Returns a list of tuples."""
+    adjectives = Counter()
 
-# # Check current working directory
-# print(f"Current working directory: {Path.cwd()}")
 
 
 #----------------------------
@@ -303,11 +292,11 @@ def main():
     print()
 
     
-    # # Shows results formated / cleaner view
-    # print("Novel TTR Results:")
-    # print("-" * 50)
-    # for title, ttr in ttr_results.items():
-    #     print(f"{title:<30}: {ttr:.4f}")
+#     # # Shows results formated / cleaner view
+#     # print("Novel TTR Results:")
+#     # print("-" * 50)
+#     # for title, ttr in ttr_results.items():
+#     #     print(f"{title:<30}: {ttr:.4f}")
 
 # Part One 1.(c)
     print(f"Flesch_Kincaide_scores:")
@@ -317,17 +306,23 @@ def main():
 # Part One 1.(e)(i) & 1.(e)(iii): 
 
     df_parsed = parse(df) # to add parsed column to existing df and saves to pickle file
-    # print(df.head())
-    # print()
+
 
 # # Part One 1.(e)(iv): 
-#     print(f"Loaded DataFrame with {len(df)} texts")
-#     print(f"Columns: {list(df.columns)}")
-    # print(df.head())
 
-
-if __name__ == "__main__":
-    main()
+    f = pd.read_pickle(Path.cwd() / "pickles" / "parsed.pickle")        #load Df from pickle file
     
+    print(f"Loaded DataFrame with {len(df)} texts")          # To make sure DataFrame loaded
+    print(f"Columns: {list(df.columns)}")
+    print(df.head())
+    
+    print("TTR scores from loaded DataFrame:")      #to compare to nltk approach
+    print(get_ttrs(df))
+    print()
 
-   
+    print("Flesch-Kincaid scores from loaded DataFrame:") #to compare to nltk approach
+    print(get_fks(df))
+    print()
+
+    # first_doc = df.iloc[0]['parsed']                        #just to get a feeling for the data
+ 

@@ -146,19 +146,19 @@ def read_novels(path):
 #     return results
 
 
-# def subjects_by_verb_pmi(doc, target_verb):
+# def subjects_by_verb_pmi(doc, target_verb):                               Part One 1.(f)(iii)
 #     """Extracts the most common subjects of a given verb in a parsed document. Returns a list."""
 #     pass
 
 
 
-# def subjects_by_verb_count(doc, verb):
+# def subjects_by_verb_count(doc, verb):                              Part One 1.(f)(ii)
 #     """Extracts the most common subjects of a given verb in a parsed document. Returns a list."""
 #     pass
 
 
 
-# def adjective_counts(doc):
+# def adjective_counts(doc):                                 Part One 1.(f)(i)
 #     """Extracts the most common adjectives in a parsed document. Returns a list of tuples."""
 #     pass
 
@@ -191,12 +191,12 @@ def main():
     # print(adjective_counts(df))
 
     # """ 
-    # for i, row in df.iterrows():
+    # for i, row in df.iterrows():                              Part One 1.(f)(ii)
     #     print(row["title"])
     #     print(subjects_by_verb_count(row["parsed"], "hear"))
     #     print("\n")
 
-    # for i, row in df.iterrows():
+    # for i, row in df.iterrows():                              Part One 1.(f)(iii)
     #     print(row["title"])
     #     print(subjects_by_verb_pmi(row["parsed"], "hear"))
     #     print("\n")

@@ -70,6 +70,16 @@ Flesch_Kincaide_scores:
 {'Sense and Sensibility': 10.8894, 'North and South': 6.6553, 'A Tale of Two Cities': 9.843, 'Erewhon': 14.6793, 'The American': 7.9875, 'Dorian Gray': 4.9493, 'Tess of the DUrbervilles': 7.6292, 'The Golden Bowl': 12.4424, 'The Secret Garden': 4.6525, 'Portrait of the Artist': 6.4493, 'The Black Moth': 4.2087, 'Orlando': 9.5421, 'Blood Meridian': 5.6345}
 ```
 
+Result output: Part One 1.(e)(ii):
+```
+About to start serialization...
+Creating directory...
+Serializing DataFrame to C:\Users\ClaudiaRoehn\Desktop\New folder\OneDrive - Home\0_NLP\nlp-coursework-2024-25-chrrr007\pickles\parsed.pickle
+
+DataFrame saved as parsed.pickle
+
+Function ending...
+```
 
 
 Result output: Part One 1.(e)(iii):
@@ -81,5 +91,13 @@ Result output: Part One 1.(e)(iii):
 3  SAMUEL BUTLER.\nAugust 7, 1901\n\nCHAPTER I: W...                Erewhon   Butler  1872  (SAMUEL, BUTLER, ., \n, August, 7, ,, 1901, \n...
 4  THE AMERICAN\n\nby Henry James\n\n\n1877\n\n\n...           The American    James  1877  (THE, AMERICAN, \n\n, by, Henry, James, \n\n\n...
 
+```
 
+Result output: Part One 1.(e)(iv) spaCy:
+```
+TTR scores from loaded DataFrame:
+{'Sense and Sensibility': 0.052847302442989776, 'North and South': 0.0549040694681204, 'A Tale of Two Cities': 0.07072694469399422, 'Erewhon': 0.09151270564132943, 'The American': 0.06381607058523676, 'Dorian Gray': 0.08355234620193412, 'Tess of the DUrbervilles': 0.07778957979554696, 'The Golden Bowl': 0.047475476259872806, 'The Secret Garden': 0.05847231570812455, 'Portrait of the Artist': 0.10472745625841184, 'The Black Moth': 0.07866588875923765, 'Orlando': 0.1137245917497168, 'Blood Meridian': 0.08568897067593587}
+
+Flesch-Kincaid scores from loaded DataFrame:
+{'Sense and Sensibility': 10.8894, 'North and South': 6.6553, 'A Tale of Two Cities': 9.843, 'Erewhon': 14.6793, 'The American': 7.9875, 'Dorian Gray': 4.9493, 'Tess of the DUrbervilles': 7.6292, 'The Golden Bowl': 12.4424, 'The Secret Garden': 4.6525, 'Portrait of the Artist': 6.4493, 'The Black Moth': 4.2087, 'Orlando': 9.5421, 'Blood Meridian': 5.6345}
 ```
