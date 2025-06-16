@@ -9,7 +9,7 @@ import csv
 import pickle
 
 nlp = spacy.load("en_core_web_sm")      #load spacy pre-trained model
-nlp.max_length = 2000000
+nlp.max_length = 2000000                #needed to implemented/increase limit to avoid exceeding max leng of spaCy model
 
 # Part One 1.(a)(i):
 def read_novels(path):
@@ -213,7 +213,8 @@ def parse_texts(df):
     return df
 
 #----------------------------    
-# Part One 1.(e)(ii):
+# # Part One 1.(e)(ii):
+
 def parse(df, store_path=Path.cwd() / "pickles", out_name="parsed.pickle"):
     """
     Parses the text of a DataFrame using spaCy, stores the parsed docs as a column and writes 
@@ -222,15 +223,28 @@ def parse(df, store_path=Path.cwd() / "pickles", out_name="parsed.pickle"):
     print(f"Processing {len(df)} texts with spaCy...")
     df['parsed'] = df['text'].apply(nlp)
     print("spaCy processing finished! \n")
+    
+    print("About to start serialization...")  # implemented as code didn't run, seems useful to see wher problems occure
+    
+    try:
+        print("Creating directory...")  # implemented as code didn't run, seems useful to see where problems occure
+        store_path.mkdir(exist_ok=True)
+        
+        filepath = store_path / out_name
+        print(f"Serializing DataFrame to {filepath} \n")
+        
+        with open(filepath, "wb") as f:
+            pickle.dump(df, f)
+        
+        print(f"DataFrame saved as {out_name} \n")
+        
+    except Exception as e:
+        print(f"Error during serialization: {e}")
+    
+    print("Function ending...")  # confirmation for exceution - felt useful
 
-    store_path.mkdir(exist_ok=True)
-    filepath =store_path/out_name
-    print(f"Serializing DataFrame to {filepath} \n")
 
-    with open(filepath, "wb") as f:
-        pickle.dump(df, f)
 
-    print(f"DataFrame saved as {out_name} \n")
 
 # Part One 1.(e)(iii):    
     return df
@@ -239,7 +253,21 @@ def parse(df, store_path=Path.cwd() / "pickles", out_name="parsed.pickle"):
 
 # # Part One 1.(e)(iv):
 
-# df = pd.read_pickle(Path.cwd() / "pickles" /"name.pickle")        #load Df from pickle
+# df = pd.read_pickle(Path.cwd() / "pickles" /"parsed.pickle")        #load Df from pickle
+
+# pickles_dir = Path.cwd() / "pickles"
+# print(f"Pickles directory exists: {pickles_dir.exists()}")
+
+# # Check what's in the pickles directory
+# if pickles_dir.exists():
+#     print(f"Contents of pickles directory:")
+#     for file in pickles_dir.iterdir():
+#         print(f"  - {file.name}")
+# else:
+#     print("Pickles directory not found!")
+
+# # Check current working directory
+# print(f"Current working directory: {Path.cwd()}")
 
 
 #----------------------------
@@ -286,17 +314,16 @@ def main():
     print(get_fks(df))
     print()
 
-# Part One 1.(e)(i)
+# Part One 1.(e)(i) & 1.(e)(iii): 
 
-    df_parsed = parse_texts(df) # to add parsed column to existing df
-# Part One 1.(e)(iii):   
-    print(df.head())
-    print()
+    df_parsed = parse(df) # to add parsed column to existing df and saves to pickle file
+    # print(df.head())
+    # print()
 
 # # Part One 1.(e)(iv): 
 #     print(f"Loaded DataFrame with {len(df)} texts")
 #     print(f"Columns: {list(df.columns)}")
-#     print(df.head())
+    # print(df.head())
 
 
 if __name__ == "__main__":
