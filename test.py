@@ -95,7 +95,7 @@ def calculate_ttr_dict(path=Path.cwd() / "p1-texts" / "novels"):
     ttr_dict ={}
 
     txt_files = list(path.glob("*.txt"))
-    print(f"Found {len(txt_files)} files to process:")
+    print(f"Found {len(txt_files)} files to process:")          #not required but useful check if all files processed
 
     # Process each text file
     for txt_file in txt_files:
@@ -121,6 +121,18 @@ def calculate_ttr_dict(path=Path.cwd() / "p1-texts" / "novels"):
     print(f"Total entries in dictionary: {len(ttr_dict)}\n")  # to check as it didn't work 
     return ttr_dict
     
+# Check if texts are cleaned like this:
+#     # remove punctuation using regular expressions
+#     # this line of code locates the punctuation within the given text and compiles that punctuation into a single variable
+#     re_punc = re.compile('[%s]' % re.escape(string.punctuation))
+#     # this line of code substitutes the punctuation we just compiled with nothing ''
+#     tokens = [re_punc.sub('', token) for token in tokens]
+
+#     # only include tokens that aren't numbers
+#     tokens = [token for token in tokens if token.isalpha()]
+#     return tokens
+
+
 #----------------------------    
 # Part One 1.(c):
 
@@ -139,7 +151,7 @@ def count_syl(word, d):
     if word in d:
         return len([phoneme for phoneme in d[word][0] if phoneme[-1].isdigit()])
     else:
-        vowels = "aeiouy"
+        vowels = "aeiouy"    #vowel letters +y
         syllables = 0
         prev_was_vowel = False
         for char in word:
@@ -150,7 +162,7 @@ def count_syl(word, d):
         return max(1, syllables)
 
 def fk_level(text, d):
-    """Returns the Flesch-Kincaid Grade Level of a text (higher grade is more difficult).
+    """Returns the Flesch-Kincaid Grade Level of a text (higher grade: more difficult).
     Requires a dictionary of syllables per word.
 
     Args:
@@ -252,10 +264,41 @@ def parse(df, store_path=Path.cwd() / "pickles", out_name="parsed.pickle"):
 
 from collections import Counter
 
+def syntactic_objects_counts(df):
+    """Extracts the most common syntactic objects (dependency labels) for each novel."""
+    results = {}
+    
+    for i, row in df.iterrows():
+        title = row['title']
+        doc = row['parsed']
+        
+        syntactic_objects = Counter()
+        for token in doc:
+            # if token.is_alpha and not token.is_space:  # to match earlier filtering check if required for consitency!
+                syntactic_objects[token.dep_] += 1
+        
+        results[title] = syntactic_objects.most_common(10)
+    
+    return results
 
-def adjective_counts(doc):             
-    """Extracts the most common adjectives in a parsed document. Returns a list of tuples."""
-    adjectives = Counter()
+# def adjective_counts(df):             #check if this function is required as question asks for syntactic objects
+#     """Extracts the most common adjectives for each novel in DataFrame. 
+#        Returns dictinary"""
+#     results={}
+
+#     for i, row in df.iterrows():
+#         title = row['title']
+#         doc = row['parsed'] 
+
+#     adjectives=Counter()
+#     for token in doc:
+#             if token.pos_ == "ADJ":
+#                 adjectives[token.lemma_] += 1
+
+#     results[title] =adjectives.most_common(10)             # Returns the 10 most common adjectives
+    
+#     return results
+
 
 
 
@@ -272,57 +315,57 @@ def main():
     except LookupError:
         nltk.download('cmudict')    
 
-# Part One 1.(a)(i) & (ii)
+# # Part One 1.(a)(i) & (ii)
 
-    path = Path.cwd() / "p1-texts" / "novels"
-    print(path)
-    print()
-    df=read_novels(path)
-    print(df.head())
-    print()
+#     path = Path.cwd() / "p1-texts" / "novels"
+#     print(path)
+#     print()
+#     df=read_novels(path)
+#     print(df.head())
+#     print()
 
     
 
-# Part One 1.(b)
+# # Part One 1.(b)
    
-    # Calculate TTR for all novels
-    ttr_results = calculate_ttr_dict()
-    print(f"TTRs:")
-    print(get_ttrs(df))
-    print()
+#     # Calculate TTR for all novels
+#     ttr_results = calculate_ttr_dict()
+#     print(f"TTRs:")
+#     print(get_ttrs(df))
+#     print()
 
     
-#     # # Shows results formated / cleaner view
-#     # print("Novel TTR Results:")
-#     # print("-" * 50)
-#     # for title, ttr in ttr_results.items():
-#     #     print(f"{title:<30}: {ttr:.4f}")
+# #     # # Shows results formated / cleaner view
+# #     # print("Novel TTR Results:")
+# #     # print("-" * 50)
+# #     # for title, ttr in ttr_results.items():
+# #     #     print(f"{title:<30}: {ttr:.4f}")
 
-# Part One 1.(c)
-    print(f"Flesch_Kincaide_scores:")
-    print(get_fks(df))
-    print()
+# # Part One 1.(c)
+#     print(f"Flesch_Kincaide_scores:")
+#     print(get_fks(df))
+#     print()
 
-# Part One 1.(e)(i) & 1.(e)(iii): 
+# # Part One 1.(e)(i) & 1.(e)(iii): 
 
-    df_parsed = parse(df) # to add parsed column to existing df and saves to pickle file
+#     df_parsed = parse(df) # to add parsed column to existing df and saves to pickle file
 
 
-# # Part One 1.(e)(iv): 
+# # # Part One 1.(e)(iv): 
 
-    f = pd.read_pickle(Path.cwd() / "pickles" / "parsed.pickle")        #load Df from pickle file
+#     df= pd.read_pickle(Path.cwd() / "pickles" / "parsed.pickle")        #load Df from pickle file
     
-    print(f"Loaded DataFrame with {len(df)} texts")          # To make sure DataFrame loaded
-    print(f"Columns: {list(df.columns)}")
-    print(df.head())
+#     print(f"Loaded DataFrame with {len(df)} texts")          # To make sure DataFrame loaded
+#     print(f"Columns: {list(df.columns)}")
+#     print(df.head())
     
-    print("TTR scores from loaded DataFrame:")      #to compare to nltk approach
-    print(get_ttrs(df))
-    print()
+#     print("TTR scores from loaded DataFrame:")      #to compare to nltk approach
+#     print(get_ttrs(df))
+#     print()
 
-    print("Flesch-Kincaid scores from loaded DataFrame:") #to compare to nltk approach
-    print(get_fks(df))
-    print()
+#     print("Flesch-Kincaid scores from loaded DataFrame:") #to compare to nltk approach
+#     print(get_fks(df))
+#     print()
 
-    # first_doc = df.iloc[0]['parsed']                        #just to get a feeling for the data
- 
+#     # first_doc = df.iloc[0]['parsed']                        #just to get a feeling for the data
+#   
