@@ -260,7 +260,7 @@ def parse(df, store_path=Path.cwd() / "pickles", out_name="parsed.pickle"):
 # #----------------------------    
 
 
-# # Part One 1.(f):
+# Part One 1.(f)(i):
 
 from collections import Counter
 
@@ -299,6 +299,17 @@ def syntactic_objects_counts(df):
     
 #     return results
 
+# Part One 1.(f)(ii):
+def subjects_by_verb_count(doc, verb):
+#     """Extracts the most common subjects of a given verb in a parsed document. Returns a list."""
+    subjects = Counter()
+
+    for token in doc:
+        if token.lemma_ == verb:
+            for child in token.children:
+                if child.dep_ == "nsubj":
+                    subjects[child.lemma_]+=1
+    return subjects.most_common(10)
 
 
 
@@ -368,4 +379,29 @@ def main():
 #     print()
 
 #     # first_doc = df.iloc[0]['parsed']                        #just to get a feeling for the data
-#   
+#     # print(f"First novel has {len(first_doc)} tokens")
+#     # print(f"Sample tokens: {[token.text for token in first_doc[:10]]}")
+
+# Part One 1.(f)(i):
+
+
+    df = pd.read_pickle(Path.cwd() / "pickles" / "parsed.pickle")
+    print(f"\n syntactic objects:")
+    print(syntactic_objects_counts(df))
+    print("\n")
+    # print(f"\n adj count \n")     #check if this function is required as Q1(f)(i) asks for syntactic objects
+    # print(adjective_counts(df))
+
+# Part One 1.(f)(i):
+    # df = pd.read_pickle(Path.cwd() / "pickles" / "parsed.pickle")
+    for i, row in df.iterrows():
+        print(row["title"])
+        print(subjects_by_verb_count(row["parsed"], "hear"))
+        print("\n")
+
+
+if __name__ == "__main__":
+    main()
+    
+
+   
