@@ -264,22 +264,15 @@ def parse(df, store_path=Path.cwd() / "pickles", out_name="parsed.pickle"):
 
 from collections import Counter
 
-def syntactic_objects_counts(df):
+def syntactic_objects_counts(doc):
     """Extracts the most common syntactic objects (dependency labels) for each novel."""
-    results = {}
+    syntactic_objects= Counter()
     
-    for i, row in df.iterrows():
-        title = row['title']
-        doc = row['parsed']
+    for token in doc:
+        syntactic_objects[token.dep_] += 1
         
-        syntactic_objects = Counter()
-        for token in doc:
-            # if token.is_alpha and not token.is_space:  # to match earlier filtering check if required for consitency!
-                syntactic_objects[token.dep_] += 1
-        
-        results[title] = syntactic_objects.most_common(10)
-    
-    return results
+    return syntactic_objects.most_common(10)
+
 
 # def adjective_counts(df):             #check if this function is required as question asks for syntactic objects
 #     """Extracts the most common adjectives for each novel in DataFrame. 
@@ -312,8 +305,13 @@ def subjects_by_verb_count(doc, verb):
     return subjects.most_common(10)
 
 
+# Part One 1.(f)(iii)
+import math
+def subjects_by_verb_pmi(doc, target_verb):                               
+#     """Extracts the most common subjects of a given verb in a parsed document. Returns a list."""
 
-#----------------------------
+
+#==========================================================
 def main():
 
     try:
@@ -384,20 +382,29 @@ def main():
 
 # Part One 1.(f)(i):
 
-
     df = pd.read_pickle(Path.cwd() / "pickles" / "parsed.pickle")
-    print(f"\n syntactic objects:")
-    print(syntactic_objects_counts(df))
-    print("\n")
+
+    for i, row in df.iterrows():
+        print(row["title"])
+        print(syntactic_objects_counts(row["parsed"]))
+        print("\n")
+
     # print(f"\n adj count \n")     #check if this function is required as Q1(f)(i) asks for syntactic objects
     # print(adjective_counts(df))
 
-# Part One 1.(f)(i):
+# Part One 1.(f)(ii):
     # df = pd.read_pickle(Path.cwd() / "pickles" / "parsed.pickle")
     for i, row in df.iterrows():
         print(row["title"])
         print(subjects_by_verb_count(row["parsed"], "hear"))
         print("\n")
+
+# Part One 1.(f)(iii):
+
+    # for i, row in df.iterrows(): 
+    #     print(row["title"])
+    #     print(subjects_by_verb_pmi(row["parsed"], "hear"))
+    #     print("\n")
 
 
 if __name__ == "__main__":
