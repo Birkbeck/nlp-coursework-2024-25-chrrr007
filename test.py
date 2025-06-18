@@ -310,6 +310,36 @@ import math
 def subjects_by_verb_pmi(doc, target_verb):                               
 #     """Extracts the most common subjects of a given verb in a parsed document. Returns a list."""
 
+    # I reuse existing/previous function-subject counts
+    subject_count_list=subjects_by_verb_count(doc, target_verb)
+    subjects_of_target_verb=dict(subject_count_list)
+
+    # pre calc for PMI
+    all_subjects=Counter()
+    all_verbs=Counter()
+    total_tokens = 0
+
+    for token in doc:
+        if token.dep_ == "nsubj":
+            all_subjects[token.lemma_] +=1
+        if token.pos_ == "VERB":
+            all_verbs[token.lemma_] += 1
+        total_tokens +=1
+
+    pmi_scores=[]
+    for subject, joint_count in subjects_of_target_verb.items():
+        p_subject_verb=joint_count/total_tokens
+        p_subject=all_subjects[subject]/total_tokens
+        p_verb=all_verbs[target_verb]/ total_tokens
+
+        if p_subject>0 and p_verb>0:
+            pmi= math.log2(p_subject_verb/(p_subject*p_verb))
+            pmi_scores.append((subject, joint_count, pmi))
+
+    pmi_scores.sort(key=lambda x: x[2], reverse=True)
+
+    return [(subject, count) for subject, count, pmi in pmi_scores[:10]]
+
 
 #==========================================================
 def main():
@@ -383,7 +413,7 @@ def main():
 # Part One 1.(f)(i):
 
     df = pd.read_pickle(Path.cwd() / "pickles" / "parsed.pickle")
-
+    print("syntactic_objects_counts:")          
     for i, row in df.iterrows():
         print(row["title"])
         print(syntactic_objects_counts(row["parsed"]))
@@ -394,17 +424,18 @@ def main():
 
 # Part One 1.(f)(ii):
     # df = pd.read_pickle(Path.cwd() / "pickles" / "parsed.pickle")
+    print("subjects_by_verb_count:")
     for i, row in df.iterrows():
         print(row["title"])
         print(subjects_by_verb_count(row["parsed"], "hear"))
         print("\n")
 
 # Part One 1.(f)(iii):
-
-    # for i, row in df.iterrows(): 
-    #     print(row["title"])
-    #     print(subjects_by_verb_pmi(row["parsed"], "hear"))
-    #     print("\n")
+    print("subjects_by_verb_pmi:")
+    for i, row in df.iterrows(): 
+        print(row["title"])
+        print(subjects_by_verb_pmi(row["parsed"], "hear"))
+        print("\n")
 
 
 if __name__ == "__main__":
