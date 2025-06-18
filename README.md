@@ -101,3 +101,53 @@ TTR scores from loaded DataFrame:
 Flesch-Kincaid scores from loaded DataFrame:
 {'Sense and Sensibility': 10.8894, 'North and South': 6.6553, 'A Tale of Two Cities': 9.843, 'Erewhon': 14.6793, 'The American': 7.9875, 'Dorian Gray': 4.9493, 'Tess of the DUrbervilles': 7.6292, 'The Golden Bowl': 12.4424, 'The Secret Garden': 4.6525, 'Portrait of the Artist': 6.4493, 'The Black Moth': 4.2087, 'Orlando': 9.5421, 'Blood Meridian': 5.6345}
 ```
+
+
+Result output example: Part One 1.(f)(i):
+```
+syntactic_objects_counts:
+Sense and Sensibility
+[('punct', 20299), ('prep', 13332), ('pobj', 12073), ('nsubj', 11990), ('advmod', 8822), ('det', 8666), ('aux', 7436), ('dobj', 6325), ('poss', 4948), ('cc', 4712)]
+
+
+North and South
+[('punct', 36410), ('nsubj', 20761), ('prep', 18414), ('pobj', 16921), ('det', 13572), ('advmod', 12094), ('aux', 11384), ('dobj', 10180), ('ROOT', 9183), ('amod', 8242)]
+
+
+A Tale of Two Cities
+[('punct', 29933), ('prep', 15924), ('pobj', 15176), ('det', 13524), ('nsubj', 12858), ('dep', 12569), ('advmod', 7973), ('amod', 6957), ('dobj', 6883), ('ROOT', 6660)]
+
+
+Erewhon
+[('punct', 9488), ('prep', 9194), ('pobj', 8484), ('det', 7713), ('nsubj', 7628), ('advmod', 5578), ('aux', 4748), ('dobj', 4051), ('amod', 3879), ('conj', 3871)]
+
+
+Result output example: Part One 1.(f)(ii):
+```
+subjects_by_verb_count:
+Sense and Sensibility
+[('I', 32), ('you', 19), ('she', 14), ('they', 6), ('Elinor', 6), ('he', 6), ('Jennings', 3), ('we', 2), ('Brandon', 1), ('both', 1)]
+
+
+North and South
+[('she', 59), ('I', 47), ('he', 23), ('you', 15), ('they', 13), ('Margaret', 10), ('we', 5), ('Thornton', 3), ('who', 3), ('yo', 2)]
+
+
+A Tale of Two Cities
+[('I', 23), ('he', 19), ('you', 12), ('she', 11), ('they', 5), ('Monseigneur', 2), ('one', 1), ('Jerry', 1), ('we', 1), ('mother', 1)]
+```
+
+Result output example: Part One 1.(f)(iii):
+```
+subjects_by_verb_pmi:
+Sense and Sensibility
+[('both', 1), ('Jennings', 3), ('you', 19), ('Brandon', 1), ('I', 32), ('Elinor', 6), ('they', 6), ('we', 2), ('she', 14), ('he', 6)]
+
+
+North and South
+[('yo', 2), ('she', 59), ('they', 13), ('I', 47), ('Margaret', 10), ('you', 15), ('we', 5), ('Thornton', 3), ('he', 23), ('who', 3)]
+
+
+A Tale of Two Cities
+[('mother', 1), ('Monseigneur', 2), ('she', 11), ('Jerry', 1), ('one', 1), ('you', 12), ('I', 23), ('he', 19), ('they', 5), ('we', 1)]
+```
