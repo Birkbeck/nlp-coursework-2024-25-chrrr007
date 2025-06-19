@@ -26,3 +26,7 @@ top_4_parties = df['party'].value_counts().head(4).index.tolist()
 
 # Filter dataframe to keep only rows with these four parties
 df = df[df['party'].isin(top_4_parties)]
+
+#PART 2Q. 2(a)(iii):
+# Keep only rows where speech_class is 'Speech'
+df = df[df['speech_class'] == 'Speech']

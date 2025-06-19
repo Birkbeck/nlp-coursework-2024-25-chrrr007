@@ -233,3 +233,10 @@ Conservative               25079
 Labour                      8038
 Scottish National Party     2303
 Liberal Democrat             803
+
+
+speech classes before removing rows:
+speech_class
+Speech        38457
+Procedural     1394
+Division        149
