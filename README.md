@@ -155,6 +155,8 @@ A Tale of Two Cities
 
 __PART TWO__
 
+Record of data before and after applying changes to keep track:
+
 Q 2(a): Dataset loaded and DF head output:
 ```
 Dataset shape: (40000, 8)
@@ -165,8 +167,8 @@ Column names:
 1  I thank the hon. Gentleman for raising issues ...  Conservative                 Mid Sussex  2020-09-14       Speech  Work and Pensions  2020     Mims Davies
 2  As my hon. Friend the Member for Portsmouth So...        Labour     Warwick and Leamington  2020-09-14       Speech  Work and Pensions  2020    Matt Western
 3  I thank the hon. Gentleman for raising the nee...  Conservative                 Mid Sussex  2020-09-14       Speech  Work and Pensions  2020     Mims Davies
-4  There is no doubt that the unemployment situat...        Labour  Ellesmere Port and Neston  2020-09-14       Speech  Work and Pensions  2020  Justin Madders```
-
+4  There is no doubt that the unemployment situat...        Labour  Ellesmere Port and Neston  2020-09-14       Speech  Work and Pensions  2020  Justin Madders
+```
 
 Q 2(a)(i):unique values BEFORE renaming:
 ```
@@ -207,7 +209,7 @@ Name: count, dtype: int64
 ```
 
 Q 2(a)(ii):
-Checked row number before and after removing all rows related to value "Speaker in party column:
+Checked row number before/after removing all rows related to value "Speaker in party column:
 
 Before removing 'Speaker' rows: 40000 rows
 After removing 'Speaker' rows: 39122 rows
@@ -234,9 +236,18 @@ Labour                      8038
 Scottish National Party     2303
 Liberal Democrat             803
 
-
+Q 2(a)(iii):
 speech classes before removing rows:
 speech_class
 Speech        38457
 Procedural     1394
 Division        149
+
+Q 2(a)(iv):
+Before filtering by speech length: 36223 rows
+Speeches < 1000 characters: 28139
+After filtering to speeches >= 1000 characters: 8084 rows
+
+
+Dataset shape: (40000, 8)
+Dataset shape: (8084, 8)
