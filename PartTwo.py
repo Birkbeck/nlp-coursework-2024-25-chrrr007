@@ -35,3 +35,25 @@ df = df[df['speech'].str.len() >= 1000]
 #prints dimensions of the resulting dataframe using shape methode
 print(f"\nFinal dataframe dimensions: {df.shape}")
 
+
+#PART_2 Q.2(b):
+#Vectorise the speeches using TfidfVectorizer from scikit-learn.
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+#Initialises TfidfVectorizer with adjusted parameters to 3000 max_features (from standard: None) and to remove stopwords (from standard: no stopword removal)
+tfidf_vectorizer = TfidfVectorizer(max_features=3000, stop_words='english')       
+tfidf = tfidf_vectorizer.fit_transform(df['speech'])
+
+# Splitting of data into train and test sets using stratified sampling (proprtionally to fit dataset and sample)
+from sklearn.model_selection import train_test_split
+
+# Split using stratified sampling based on 'party' (target variable)
+# X is the TF-IDF matrix, y is party labels
+y = df['party']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    tfidf, y, 
+    test_size=0.2,                  #default 80/20split
+    random_state=26,                #for reproducible results
+    stratify=y
+)
