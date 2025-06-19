@@ -9,7 +9,7 @@ import csv
 import pickle
 
 nlp = spacy.load("en_core_web_sm")      #load spacy pre-trained model
-nlp.max_length = 2000000                #needed to implemented/increase limit to avoid exceeding max leng of spaCy model
+nlp.max_length = 2000000                #for Q1(e)(iv):needed to implemented/increase limit to avoid exceeding max leng of spaCy model
 
 # Part One 1.(a)(i):
 def read_novels(path):
