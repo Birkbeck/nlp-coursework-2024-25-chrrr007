@@ -151,3 +151,73 @@ North and South
 A Tale of Two Cities
 [('mother', 1), ('Monseigneur', 2), ('she', 11), ('Jerry', 1), ('one', 1), ('you', 12), ('I', 23), ('he', 19), ('they', 5), ('we', 1)]
 ```
+
+
+__PART TWO__
+
+Q 2(a): Dataset loaded and DF head output:
+```
+Dataset shape: (40000, 8)
+
+Column names:
+                                              speech         party               constituency        date speech_class      major_heading  year     speakername
+0  Unemployment is soaring, uptake in benefits ha...        Labour           Portsmouth South  2020-09-14       Speech  Work and Pensions  2020  Stephen Morgan
+1  I thank the hon. Gentleman for raising issues ...  Conservative                 Mid Sussex  2020-09-14       Speech  Work and Pensions  2020     Mims Davies
+2  As my hon. Friend the Member for Portsmouth So...        Labour     Warwick and Leamington  2020-09-14       Speech  Work and Pensions  2020    Matt Western
+3  I thank the hon. Gentleman for raising the nee...  Conservative                 Mid Sussex  2020-09-14       Speech  Work and Pensions  2020     Mims Davies
+4  There is no doubt that the unemployment situat...        Labour  Ellesmere Port and Neston  2020-09-14       Speech  Work and Pensions  2020  Justin Madders```
+
+
+Q 2(a)(i):unique values BEFORE renaming:
+```
+Unique values in 'party' column:
+party
+Conservative                        25079
+Labour                               6995
+Scottish National Party              2303
+Labour (Co-op)                       1043
+Speaker                               878
+Liberal Democrat                      803
+Democratic Unionist Party             639
+Independent                           243
+Plaid Cymru                           173
+Social Democratic & Labour Party       75
+Alliance                               65
+Green Party                            55
+Alba Party                              2
+Name: count, dtype: int64
+```
+AFTER:
+```
+Unique values in 'party' column:
+party
+Conservative                        25079
+Labour                               8038
+Scottish National Party              2303
+Speaker                               878
+Liberal Democrat                      803
+Democratic Unionist Party             639
+Independent                           243
+Plaid Cymru                           173
+Social Democratic & Labour Party       75
+Alliance                               65
+Green Party                            55
+Alba Party                              2
+Name: count, dtype: int64
+```
+
+Checked row number before and after removing all rows related to value "Speaker in party column:
+
+Before removing 'Speaker' rows: 40000 rows
+After removing 'Speaker' rows: 39122 rows
+Conservative                        25079
+Labour                               8038
+Scottish National Party              2303
+Liberal Democrat                      803
+Democratic Unionist Party             639
+Independent                           243
+Plaid Cymru                           173
+Social Democratic & Labour Party       75
+Alliance                               65
+Green Party                            55
+Alba Party                              2
