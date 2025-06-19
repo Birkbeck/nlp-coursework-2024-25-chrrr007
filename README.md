@@ -206,6 +206,7 @@ Alba Party                              2
 Name: count, dtype: int64
 ```
 
+Q 2(a)(ii):
 Checked row number before and after removing all rows related to value "Speaker in party column:
 
 Before removing 'Speaker' rows: 40000 rows
@@ -221,3 +222,14 @@ Social Democratic & Labour Party       75
 Alliance                               65
 Green Party                            55
 Alba Party                              2
+
+Check before removing all other than 4 top party's:
+Before filtering to top 4 parties: 39122 rows
+Top 4 most common parties: ['Conservative', 'Labour', 'Scottish National Party', 'Liberal Democrat']
+
+After filtering to top 4 parties: 36223 rows
+party
+Conservative               25079
+Labour                      8038
+Scottish National Party     2303
+Liberal Democrat             803
