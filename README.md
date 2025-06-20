@@ -253,7 +253,7 @@ Dataset shape: (40000, 8)
 Dataset shape: (8084, 8)
 
 
-Q 2(a)(iv):
+Q 2(c):
 Required prints only:
 
 ``Random Forest Macro-Average F1 Score: 0.4547
@@ -295,3 +295,43 @@ Performance has better balance,and better performance on Lib Dem speeches.
 Better predictions on Lib Dems (100%) but 7% recall means 93% of Liberal Democrat speeches wre missed, still low performanc. But no of Lib Dem speeches was low (54).  
 
 Overall SVM better macro F1: 59.3% vs 45.5% - Far from impressiv
+
+
+Q 2(d):
+Overall SVM still better performance macro F1: 58.54% vs 47.93% - But whilst Rf improved slightly, SVM performance got worse with n_grams.
+
+Required prints only:
+```
+Random Forest Macro-Average F1 Score: 0.4793
+Random Forest Classification Report:
+                         precision    recall  f1-score   support
+
+           Conservative       0.74      0.96      0.83       964
+                 Labour       0.75      0.48      0.58       463
+       Liberal Democrat       0.00      0.00      0.00        54
+Scottish National Party       0.84      0.35      0.50       136
+
+               accuracy                           0.74      1617
+              macro avg       0.58      0.45      0.48      1617
+           weighted avg       0.72      0.74      0.71      1617
+
+
+SVM Macro-Average F1 Score: 0.5854
+SVM Classification Report:
+                         precision    recall  f1-score   support
+
+           Conservative       0.84      0.92      0.88       964
+                 Labour       0.75      0.73      0.74       463
+       Liberal Democrat       1.00      0.04      0.07        54
+Scottish National Party       0.78      0.56      0.65       136
+
+               accuracy                           0.81      1617
+              macro avg       0.84      0.56      0.59      1617
+           weighted avg       0.81      0.81      0.79      1617
+```
+RF results:  
+Still completely fails on Liberal Democrats (0.00 across all metrics)
+Poor recall other than for conservatives
+SVM:      
+Class imbalace in speechse seems to be a bottleneck, as before.
+Poor recall other than for conservatives
