@@ -251,3 +251,47 @@ After filtering to speeches >= 1000 characters: 8084 rows
 
 Dataset shape: (40000, 8)
 Dataset shape: (8084, 8)
+
+
+Q 2(a)(iv):
+Required prints only:
+
+``Random Forest Macro-Average F1 Score: 0.4547
+Random Forest Classification Report:
+                         precision    recall  f1-score   support
+
+           Conservative       0.72      0.98      0.83       964
+                 Labour       0.75      0.44      0.56       463
+       Liberal Democrat       0.00      0.00      0.00        54
+Scottish National Party       0.87      0.29      0.43       136
+
+               accuracy                           0.73      1617
+              macro avg       0.59      0.43      0.45      1617
+           weighted avg       0.72      0.73      0.69      1617
+
+
+SVM Macro-Average F1 Score: 0.5933
+SVM Classification Report:
+                         precision    recall  f1-score   support
+
+           Conservative       0.83      0.92      0.87       964
+                 Labour       0.74      0.71      0.72       463
+       Liberal Democrat       1.00      0.07      0.14        54
+Scottish National Party       0.78      0.54      0.64       136
+
+               accuracy                           0.80      1617
+              macro avg       0.84      0.56      0.59      1617
+           weighted avg       0.81      0.80      0.79      1617
+```
+RF results:
+Generally recall is below random guessing other than for Conservatives.
+Bias towards Cobnservatives: Predicts Conservative 98% of the time for actual Conservative speeches, which seems great but given the overwhelming amount of conservative speeches (dominace in the data) this is not surprising.
+Completely fails Lib Dems: 0% precision, recall, F1 (class never predicted)
+Poor performance on: 29% recall for Scottish National Party
+Pretty unbalanced overall.
+
+SVM outperforms RF:
+Performance has better balance,and better performance on Lib Dem speeches.
+Better predictions on Lib Dems (100%) but 7% recall means 93% of Liberal Democrat speeches wre missed, still low performanc. But no of Lib Dem speeches was low (54).  
+
+Overall SVM better macro F1: 59.3% vs 45.5% - Far from impressiv

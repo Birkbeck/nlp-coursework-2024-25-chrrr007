@@ -57,3 +57,32 @@ X_train, X_test, y_train, y_test = train_test_split(
     random_state=26,                #for reproducible results
     stratify=y
 )
+
+#PART_2 Q.2(c):
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from sklearn.metrics import f1_score, classification_report
+import warnings
+
+warnings.filterwarnings('ignore') #to suppress not helpful warnings
+
+#(1) Random forest classifier
+rf_classifier = RandomForestClassifier(n_estimators=300, random_state=26)
+rf_classifier.fit(X_train, y_train)
+rf_predictions = rf_classifier.predict(X_test)      # Predict on test set
+rf_f1_macro = f1_score(y_test, rf_predictions, average='macro')        # Calc macro-average F1 score
+
+print(f"\nRandom Forest Macro-Average F1 Score: {rf_f1_macro:.4f}")
+print("Random Forest Classification Report:")
+print(classification_report(y_test, rf_predictions))
+
+
+#(2) SVM with Linear Kernel
+svm_classifier = SVC(kernel='linear', random_state=26)
+svm_classifier.fit(X_train, y_train)
+svm_predictions = svm_classifier.predict(X_test)    # Predict on test set
+svm_f1_macro = f1_score(y_test, svm_predictions, average='macro')       # Calc macro-average F1 score
+
+print(f"\nSVM Macro-Average F1 Score: {svm_f1_macro:.4f}")
+print("SVM Classification Report:")
+print(classification_report(y_test, svm_predictions))
