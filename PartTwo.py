@@ -1,5 +1,11 @@
 import pandas as pd
 import os
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from sklearn.metrics import f1_score, classification_report
+import warnings
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
 
 #PART_2 Q.2(a):
 # #reading hansard40000.csw file from the p2-texts directory (subfolder of cwd)
@@ -59,10 +65,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # #PART_2 Q.2(c):
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.svm import SVC
-from sklearn.metrics import f1_score, classification_report
-import warnings
 
 warnings.filterwarnings('ignore') #to suppress not helpful warnings about zero division
 
@@ -89,8 +91,7 @@ print(classification_report(y_test, svm_predictions))
 
 
 #PART_2 Q.2(d):
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.model_selection import train_test_split
+
 
 #TfidfVectorizer with parameters as in to Q2(c) & additionally: uni-, bi- and tri-grams (n_gram added)
 tfidf_vectorizer=TfidfVectorizer(max_features=3000, stop_words="english", ngram_range=(1,3))
