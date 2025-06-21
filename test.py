@@ -354,36 +354,36 @@ def main():
     except LookupError:
         nltk.download('cmudict')    
 
-# # Part One 1.(a)(i) & (ii)
+# Part One 1.(a)(i) & (ii)
 
-#     path = Path.cwd() / "p1-texts" / "novels"
-#     print(path)
-#     print()
-#     df=read_novels(path)
-#     print(df.head())
-#     print()
+    path = Path.cwd() / "p1-texts" / "novels"
+    print(path)
+    print()
+    df=read_novels(path)
+    print(df.head())
+    print()
 
     
 
-# # Part One 1.(b)
+# Part One 1.(b)
    
-#     # Calculate TTR for all novels
-#     ttr_results = calculate_ttr_dict()
-#     print(f"TTRs:")
-#     print(get_ttrs(df))
-#     print()
+    # Calculate TTR for all novels
+    ttr_results = calculate_ttr_dict()
+    print(f"TTRs:")
+    print(get_ttrs(df))
+    print()
 
     
-# #     # # Shows results formated / cleaner view
-# #     # print("Novel TTR Results:")
-# #     # print("-" * 50)
-# #     # for title, ttr in ttr_results.items():
-# #     #     print(f"{title:<30}: {ttr:.4f}")
+    # # Shows results formated / cleaner view
+    # print("Novel TTR Results:")
+    # print("-" * 50)
+    # for title, ttr in ttr_results.items():
+    #     print(f"{title:<30}: {ttr:.4f}")
 
-# # Part One 1.(c)
-#     print(f"Flesch_Kincaide_scores:")
-#     print(get_fks(df))
-#     print()
+# Part One 1.(c)
+    print(f"Flesch_Kincaide_scores:")
+    print(get_fks(df))
+    print()
 
 # # Part One 1.(e)(i) & 1.(e)(iii): 
 
