@@ -39,7 +39,7 @@ df = df[df['speech_class'] == 'Speech']
 # Removes any rows where the text in the column 'speech' is less than 1.000 characters long
 df = df[df['speech'].str.len() >= 1000]
 #prints dimensions of the resulting dataframe using shape methode
-print(f"\nFinal dataframe dimensions: {df.shape}")
+print(f"\nQ.2(a)(iv) Final dataframe dimensions: {df.shape}")
 
 
 #PART_2 Q.2(b):
@@ -74,8 +74,8 @@ rf_classifier.fit(X_train, y_train)
 rf_predictions = rf_classifier.predict(X_test)      # Predict on test set
 rf_f1_macro = f1_score(y_test, rf_predictions, average='macro')        # Calc macro-average F1 score
 
-print(f"\nRandom Forest Macro-Average F1 Score: {rf_f1_macro:.4f}")
-print("Random Forest Classification Report:")
+print(f"\nQ.2(c) Random Forest Macro-Average F1 Score: {rf_f1_macro:.4f}")
+print("Q.2(c) Random Forest Classification Report:")
 print(classification_report(y_test, rf_predictions))
 
 
@@ -85,15 +85,14 @@ svm_classifier.fit(X_train, y_train)
 svm_predictions = svm_classifier.predict(X_test)    # Predict on test set
 svm_f1_macro = f1_score(y_test, svm_predictions, average='macro')       # Calc macro-average F1 score
 
-print(f"\nSVM Macro-Average F1 Score: {svm_f1_macro:.4f}")
-print("SVM Classification Report:")
+print(f"\nQ.2(c) SVM Macro-Average F1 Score: {svm_f1_macro:.4f}")
+print("Q.2(c) SVM Classification Report:")
 print(classification_report(y_test, svm_predictions))
 
 
 #PART_2 Q.2(d):
+#TfidfVectorizer with parameters as in to Q2(b) & additionally: bi- and tri-grams (n_gram added)
 
-
-#TfidfVectorizer with parameters as in to Q2(c) & additionally: uni-, bi- and tri-grams (n_gram added)
 tfidf_vectorizer=TfidfVectorizer(max_features=3000, stop_words="english", ngram_range=(1,3))
 tfidf=tfidf_vectorizer.fit_transform(df["speech"])
 
@@ -112,8 +111,8 @@ rf_classifier.fit(X_train, y_train)
 rf_predictions = rf_classifier.predict(X_test)      # Predict on test set
 rf_f1_macro = f1_score(y_test, rf_predictions, average='macro')        # Calc macro-average F1 score
 
-print(f"\nRandom Forest Macro-Average F1 Score: {rf_f1_macro:.4f}")
-print("Random Forest Classification Report:")
+print(f"\nQ.2(d) Random Forest Macro-Average F1 Score: {rf_f1_macro:.4f}")
+print("Q.2(d) Random Forest Classification Report:")
 print(classification_report(y_test, rf_predictions))
 
 
@@ -123,6 +122,6 @@ svm_classifier.fit(X_train, y_train)
 svm_predictions = svm_classifier.predict(X_test)    # Predict on test set
 svm_f1_macro = f1_score(y_test, svm_predictions, average='macro')       # Calc macro-average F1 score
 
-print(f"\nSVM Macro-Average F1 Score: {svm_f1_macro:.4f}")
-print("SVM Classification Report:")
+print(f"\nQ.2(d) SVM Macro-Average F1 Score: {svm_f1_macro:.4f}")
+print("Q.2(d) SVM Classification Report:")
 print(classification_report(y_test, svm_predictions))
