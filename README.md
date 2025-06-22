@@ -335,3 +335,40 @@ Poor recall other than for conservatives
 SVM:      
 Class imbalace in speechse seems to be a bottleneck, as before.
 Poor recall other than for conservatives
+
+Q 2(e):
+
+i first adjusted Q 2(d): to n_grams(1.2) which improoved the RF performance to 0.486 but reduced SVM to 0.5816
+
+adding 'sublinear_tf=True' significantly change form 57 to 63...
+```````
+Q.2(e) SVM Macro-Average F1 Score: 0.6305
+Q.2(e) SVM Classification Report:
+                         precision    recall  f1-score   support
+
+           Conservative       0.83      0.93      0.88       964
+                 Labour       0.78      0.72      0.75       463
+       Liberal Democrat       1.00      0.11      0.20        54
+Scottish National Party       0.80      0.61      0.69       136
+
+               accuracy                           0.82      1617
+              macro avg       0.85      0.59      0.63      1617
+           weighted avg       0.82      0.82      0.80      1617
+```
+
+Adjusting for the class imbalance in the data improves significantly further:
+#(2) SVM with Linear Kernel
+svm_classifier = SVC(kernel='linear', random_state=26, class_weight='balanced')  # handle class imbalance
+
+Q.2(e) SVM Macro-Average F1 Score: 0.7239
+Q.2(e) SVM Classification Report:
+                         precision    recall  f1-score   support
+
+           Conservative       0.89      0.86      0.88       964
+                 Labour       0.73      0.77      0.75       463
+       Liberal Democrat       0.60      0.44      0.51        54
+Scottish National Party       0.71      0.81      0.76       136
+
+               accuracy                           0.82      1617
+              macro avg       0.73      0.72      0.72      1617
+           weighted avg       0.82      0.82      0.82      1617
