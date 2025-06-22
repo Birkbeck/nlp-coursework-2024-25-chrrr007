@@ -338,9 +338,9 @@ Poor recall other than for conservatives
 
 Q 2(e):
 
-i first adjusted Q 2(d): to n_grams(1.2) which improoved the RF performance to 0.486 but reduced SVM to 0.5816
+I first adjusted Q 2(d): to n_grams(1.2) which improoved the RF performance to 0.486 but reduced SVM to 0.5816
 
-adding 'sublinear_tf=True' significantly change form 57 to 63...
+adding 'sublinear_tf=True' significantly improved results from 57 to 63...
 ```````
 Q.2(e) SVM Macro-Average F1 Score: 0.6305
 Q.2(e) SVM Classification Report:
@@ -355,6 +355,50 @@ Scottish National Party       0.80      0.61      0.69       136
               macro avg       0.85      0.59      0.63      1617
            weighted avg       0.82      0.82      0.80      1617
 ```
+
+
+Implementing lemma improves significantly the results of SVM:
+Q.2(e) SVM Macro-Average F1 Score: 0.6717
+Q.2(e) SVM Classification Report:
+                         precision    recall  f1-score   support
+
+           Conservative       0.83      0.93      0.88       964
+                 Labour       0.77      0.71      0.74       463
+       Liberal Democrat       0.92      0.22      0.36        54
+Scottish National Party       0.83      0.62      0.71       136
+
+               accuracy                           0.82      1617
+              macro avg       0.84      0.62      0.67      1617
+           weighted avg       0.82      0.82      0.81      1617
+
+checked
+Top 10 most frequent words:
+government: 400.98
+people: 309.84
+hon: 309.10
+support: 236.11
+right: 220.31
+minister: 213.08
+uk: 212.65
+member: 209.05
+house: 205.42
+need: 200.78
+to verify possible words to exclude
+taking "hear", "colleague", "colleagues" out again improved the result to:
+
+Q.2(e) SVM Macro-Average F1 Score: 0.6762
+Q.2(e) SVM Classification Report:
+                         precision    recall  f1-score   support
+
+           Conservative       0.84      0.93      0.88       964
+                 Labour       0.78      0.71      0.74       463
+       Liberal Democrat       0.92      0.22      0.36        54
+Scottish National Party       0.83      0.64      0.72       136
+
+               accuracy                           0.82      1617
+              macro avg       0.84      0.63      0.68      1617
+           weighted avg       0.82      0.82      0.81      1617
+
 
 Adjusting for the class imbalance in the data improves significantly further:
 #(2) SVM with Linear Kernel

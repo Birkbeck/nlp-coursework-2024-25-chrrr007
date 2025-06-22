@@ -129,14 +129,20 @@ warnings.filterwarnings('ignore') #to suppress not helpful warnings about zero d
 
 #PART_2 Q.2(e):
 #create my_toenizer to try to improve performance of ppppprevious function output for palamentary speeches
-
+from nltk.stem import WordNetLemmatizer
 def my_tokenizer(text):
     tokens =word_tokenize(text.lower())
     stop_words = set(stopwords.words('english'))
-    parliamentary_stops={"speaker", "order", "hear", "colleague", "colleagues"} 
-    stop_words.update(parliamentary_stops)
-    return[token for token in tokens if token.isalpha() and token not in stop_words]
+    lemmatizer = WordNetLemmatizer()
 
+    lemmatized_tokens = []
+    for token in tokens:
+        if token.isalpha() and token not in stop_words:
+            # Lemmatize the token
+            lemma = lemmatizer.lemmatize(token)
+            lemmatized_tokens.append(lemma)
+    
+    return lemmatized_tokens
 
 tfidf_vectorizer=TfidfVectorizer(tokenizer=my_tokenizer, max_features=3000, 
                                  ngram_range=(1,3), # uni- and bigrams only
@@ -154,7 +160,6 @@ X_train, X_test, y_train, y_test = train_test_split(
     random_state=26,                #for reproducible results
     stratify=y
 )
-
 
 #class_weight='balanced'  # classes are strongly imbalanced, thus handle class imbalance
 
