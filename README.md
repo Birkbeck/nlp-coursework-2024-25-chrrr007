@@ -2,7 +2,7 @@
 # nlp-cw-template25
 template for NLP module coursework
 
-__Student ID: 12517261__
+__Student ID: 12517261 / Claudia Herring-Roehn__
 
 Academic Declaration:
 “I have read and understood the sections of plagiarism in the College Policy
