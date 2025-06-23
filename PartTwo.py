@@ -1,3 +1,5 @@
+#Student ID: 12517261_Claudia Hering-Roehn
+
 import pandas as pd
 import os
 from sklearn.ensemble import RandomForestClassifier

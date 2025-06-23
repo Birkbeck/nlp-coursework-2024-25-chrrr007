@@ -32,7 +32,7 @@ whilst generally written in basic vocabulary with short sentences. FK doesn’t 
 So the FK score might indicate an easy read for the above, whilst it is incomprehensible for an untrained reader.
 
 
-Reference: Lecture 3
+Reference: Answer based on lecture and lab material
 
 
 Part_2 Qestion 2(f):
@@ -137,7 +137,7 @@ Note:
     camparison base clean, this was not an option.
     However, adding: class_weight="balanced" to the classifier inproved SVM results to:
 
-    SVM Macro-Average F1 Score: 0.7239 (without parliamentary topwords)
+    SVM Macro-Average F1 Score: 0.7239 (without parliamentary stopwords)
     SVM Classification Report:
                          precision    recall  f1-score   support
 
