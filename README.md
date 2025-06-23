@@ -189,7 +189,8 @@ Green Party                            55
 Alba Party                              2
 Name: count, dtype: int64
 ```
-AFTER:
+
+AFTER renaming Labour (Co-op) to Labour:
 ```
 Unique values in 'party' column:
 party
@@ -238,6 +239,7 @@ Liberal Democrat             803
 
 Q 2(a)(iii):
 speech classes before removing rows:
+
 speech_class
 Speech        38457
 Procedural     1394
@@ -252,9 +254,12 @@ After filtering to speeches >= 1000 characters: 8084 rows
 Dataset shape: (40000, 8)
 Dataset shape: (8084, 8)
 
+```
+Q.2(a)(iv) Final dataframe dimensions: (8084, 8)
+```
 
 Q 2(c):
-Required prints only:
+REQUIRED PRINT:
 
 ``Random Forest Macro-Average F1 Score: 0.4547
 Random Forest Classification Report:
@@ -284,7 +289,6 @@ Scottish National Party       0.78      0.54      0.64       136
            weighted avg       0.81      0.80      0.79      1617
 ```
 RF results:
-Generally recall is below random guessing other than for Conservatives.
 Bias towards Cobnservatives: Predicts Conservative 98% of the time for actual Conservative speeches, which seems great but given the overwhelming amount of conservative speeches (dominace in the data) this is not surprising.
 Completely fails Lib Dems: 0% precision, recall, F1 (class never predicted)
 Poor performance on: 29% recall for Scottish National Party
@@ -298,6 +302,8 @@ Overall SVM better macro F1: 59.3% vs 45.5% - Far from impressiv
 
 
 Q 2(d):
+REQUIRED PRINT:
+
 Overall SVM still better performance macro F1: 58.54% vs 47.93% - But whilst Rf improved slightly, SVM performance got worse with n_grams.
 
 Required prints only:
@@ -337,54 +343,10 @@ Class imbalace in speechse seems to be a bottleneck, as before.
 Poor recall other than for conservatives
 
 Q 2(e):
-
-I first adjusted Q 2(d): to n_grams(1.2) which improoved the RF performance to 0.486 but reduced SVM to 0.5816
-
-adding 'sublinear_tf=True' significantly improved results from 57 to 63...
-```````
-Q.2(e) SVM Macro-Average F1 Score: 0.6305
-Q.2(e) SVM Classification Report:
-                         precision    recall  f1-score   support
-
-           Conservative       0.83      0.93      0.88       964
-                 Labour       0.78      0.72      0.75       463
-       Liberal Democrat       1.00      0.11      0.20        54
-Scottish National Party       0.80      0.61      0.69       136
-
-               accuracy                           0.82      1617
-              macro avg       0.85      0.59      0.63      1617
-           weighted avg       0.82      0.82      0.80      1617
-```
+REQUIRED PRINT:
 
 
-Implementing lemma improves significantly the results of SVM:
-Q.2(e) SVM Macro-Average F1 Score: 0.6717
-Q.2(e) SVM Classification Report:
-                         precision    recall  f1-score   support
 
-           Conservative       0.83      0.93      0.88       964
-                 Labour       0.77      0.71      0.74       463
-       Liberal Democrat       0.92      0.22      0.36        54
-Scottish National Party       0.83      0.62      0.71       136
-
-               accuracy                           0.82      1617
-              macro avg       0.84      0.62      0.67      1617
-           weighted avg       0.82      0.82      0.81      1617
-
-checked
-Top 10 most frequent words:
-government: 400.98
-people: 309.84
-hon: 309.10
-support: 236.11
-right: 220.31
-minister: 213.08
-uk: 212.65
-member: 209.05
-house: 205.42
-need: 200.78
-to verify possible words to exclude
-taking "hear", "colleague", "colleagues" out again improved the result to:
 
 Q.2(e) SVM Macro-Average F1 Score: 0.6762
 Q.2(e) SVM Classification Report:
@@ -399,20 +361,3 @@ Scottish National Party       0.83      0.64      0.72       136
               macro avg       0.84      0.63      0.68      1617
            weighted avg       0.82      0.82      0.81      1617
 
-
-Adjusting for the class imbalance in the data improves significantly further:
-#(2) SVM with Linear Kernel
-svm_classifier = SVC(kernel='linear', random_state=26, class_weight='balanced')  # handle class imbalance
-
-Q.2(e) SVM Macro-Average F1 Score: 0.7239
-Q.2(e) SVM Classification Report:
-                         precision    recall  f1-score   support
-
-           Conservative       0.89      0.86      0.88       964
-                 Labour       0.73      0.77      0.75       463
-       Liberal Democrat       0.60      0.44      0.51        54
-Scottish National Party       0.71      0.81      0.76       136
-
-               accuracy                           0.82      1617
-              macro avg       0.73      0.72      0.72      1617
-           weighted avg       0.82      0.82      0.82      1617

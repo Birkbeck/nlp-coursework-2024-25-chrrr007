@@ -1,6 +1,5 @@
-Student ID: 12517261
+NLP Coursework_Student ID: 12517261
 Claudia Herring-Roehn
-
 
 Academic Declaration:
 “I have read and understood the sections of plagiarism in the College Policy
@@ -13,16 +12,16 @@ plagiarism detection software, search engines or meta-searching software.”
 
 Part1 Question 1(d):
 The Flesch-Kincaid (“FK”) readability score is a way to measure the difficulty of a text. 
-Meaning the formular outputs a score indicating how readable (easy or hard) a text is. 
-It takes sentence length and syllable count into consideration. 
+The formular takes sentence length and syllable count into consideration and outputs a score
+indicating how readable (easy or hard) a text is. 
 
 This works well with standard texts that follow conventional English patterns. 
-However, for  texts which do not follow these patterns, have non-Western rhetorical structures, 
+However, for texts which do not follow these patterns, have non-Western rhetorical structures, 
 or use complex metaphors and abstract concepts, that make comprehension challenging the FK might be
 a limited indicator for readability as it cannot pick up these patterns. 
 Equally challenging are non-standard structures, contractions or colloquials.
 
-Equally limitations of the FK score may occcure when dealing with complex ideas and concepts which are explained
+FK score limitations may also occcure, when dealing with complex ideas and concepts which are explained
 with basic vocabulary in short sentences to make it easier readable, as for instance in philosophical texts
 or mathematical proofs. Cognitive demands, conceptual difficulty and sophisticated abstract reasoning cannot
 be detected by the formular. 
@@ -37,3 +36,117 @@ Reference: Lecture 3
 
 
 Part_2 Qestion 2(f):
+
+The aim of my_tokenizer/question 2(e) was generally to improve the output of Q2(d), which yielded:
+
+Random Forest ("RF") results:
+Generally recall is below random guessing other than for Conservatives.
+Bias towards Conservatives: Predicts Conservative 98% of the time for actual Conservative speeches, 
+which seems great but given the overwhelming amount of conservative speeches (dominace in the data)
+this is not surprising.
+RF completely fails Lib Dems: 0% precision, recall, F1 (class never predicted)
+Poor performance, with 29% recall for Scottish National Party.
+Overall pretty unbalanced.
+
+SVM outperformed RF:
+Performance has better balance, precision and reall apear good, but probably a result of the unbalanced data.
+Better predictions on Lib Dems (100%) but 7% recall means 93% of Liberal Democrat speeches were missed, 
+still low performanc. But low no of Lib Dem speeches in data (54).  
+
+Overall SVM returned a better macro F1: 59.3% vs 45.5% RF.
+
+
+Aim of my_tokenizer / Tdidfvectorizer:
+I consider the biggest issue here to be the large imbalance in the data (Conservative speeches 20x vs Lib Dem speeches).
+The my_tokenizer I created aims to get a better balanced output and a higher macro F1, 
+as well as improving the recall and F1 for the minoroty parties (Lib Dem and SNP).
+
+The parameters used to improve the performance are:
+
+(1) lemmatized_tokens to reduce word variations to their base to make better use of the 3000 feature limit    
+        Result: implementing lemma improved significantly the results of SVM
+
+(2) parliamentary_stops = {"house", "need", "people"} which seem to be generic and interparty used/no distinguisher
+        Result: improved SMV outcome for minority parties  and F1 Score from: 0.6762 to 0.6795
+
+(3) min_df=2 
+    to ignores rare words which appear in less than 2 docs, to reduce noise and overfitting
+        Result: improved SMV outcome for minority parties
+
+(4) max_df = 0.95 
+    to remove common words which appear in 95% of the speeches and which won't help distinguish individual parties.
+        I tried lower scores but 0.95 returned best performance. 
+
+(5) sublinear_tf=True
+    This should help avoid words which are repeated frequently to dominate and 
+    create a more balanced representatation of vocabulary
+        Result: adding 'sublinear_tf=True' significantly improved results
+
+
+I kept n_grams(1, 3) as changing it to (1,2) worsened the performance.
+I checked the 10 most common words before starting, but originally didn't feel there was any to be condidered noise to be reduced, whithout 
+deleting identifying context. However, I added the parliamentary stopwords:parliamentary_stops = {"house", "need", "people"},
+at the end as these improved the SVM Macro-Average F1 Score to: 0.6780 and benefitted the scores for the minority parties
+One may could leave this adjustment out to slim the model, as improvement is not as significant as the other changes.
+
+Top 10 most frequent words:
+government: 400.98
+people: 309.84
+hon: 309.10
+support: 236.11
+right: 220.31
+minister: 213.08
+uk: 212.65
+member: 209.05
+house: 205.42
+need: 200.78
+to verify possible words to exclude
+
+I tried a diverse range of other adjustments but the final version returned the best result.
+
+Sumary: 
+The best performing model, achieving my aims outlined above, was the SVM with the above mentioned adjustments, 
+which improved the macro F1 to: 67.95 (from 59.3% in 2(d)).
+The Lib Dem precision reduced slightly to 0.93 but it's recall improved to 0.24 as well as the F1 to 0.38, 
+which I felt was more important/significant (from 1.00, 0.07, 0.14 respectively). 
+At the same time the SNP outputs improved as well to 0.82 precision, 0.64 recall and F1 of 0.72 
+(from 0.78, 0.54, 0.64 respectively).  
+The results for the dominant data sets of Conservatives and Labour changed only insignificantly.
+Overall the the model output appears more balanced but Lib Dem recall is still rather low. 
+Given the small size of the Lib Dem sample data set it seems not too bad of an outcome.
+
+Q.2(e) SVM Macro-Average F1 Score: 0.6795
+Q.2(e) SVM Classification Report:
+                         precision    recall  f1-score   support
+
+           Conservative       0.84      0.93      0.88       964
+                 Labour       0.77      0.71      0.74       463
+       Liberal Democrat       0.93      0.24      0.38        54
+Scottish National Party       0.82      0.64      0.72       136
+
+               accuracy                           0.82      1617
+              macro avg       0.84      0.63      0.68      1617
+           weighted avg       0.82      0.82      0.81      1617
+
+
+Note:
+    I consider the biggest issue here to be the large imbalance in the data (conservative speeches 20x vs Lib Dem speeches) 
+    and the only way I could think of to implement/create balance was to 
+    add: class_weight="balanced" which to the classifier. This significantly improved the result. 
+    However, as we were asked to use the same classifier as before, to make sure to keep the 
+    camparison base clean, this was not an option.
+    However, adding: class_weight="balanced" to the classifier inproved SVM results to:
+
+    SVM Macro-Average F1 Score: 0.7239 (without parliamentary topwords)
+    SVM Classification Report:
+                         precision    recall  f1-score   support
+
+           Conservative       0.89      0.86      0.88       964
+                 Labour       0.73      0.77      0.75       463
+       Liberal Democrat       0.60      0.44      0.51        54
+Scottish National Party       0.71      0.81      0.76       136
+
+               accuracy                           0.82      1617
+              macro avg       0.73      0.72      0.72      1617
+           weighted avg       0.82      0.82      0.82      1617
+

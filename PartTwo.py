@@ -19,7 +19,7 @@ df=pd.read_csv(file_path)
 #re-naming value:'Labour (Co-op)' in 'party' column to 'Labour' 
 df['party'] = df['party'].replace('Labour (Co-op)', 'Labour')
 
-print(df['party'].value_counts())
+#print(df['party'].value_counts())      not required print only for checking
 
 
 #PART_2 Q.2(a)(ii):
@@ -46,93 +46,97 @@ print(f"\nQ.2(a)(iv) Final dataframe dimensions: {df.shape}")
 
 
 #PART_2 Q.2(b):
-# #Vectorise the speeches using TfidfVectorizer from scikit-learn.
-# #Initialises TfidfVectorizer with adjusted parameters to 3000 max_features (from standard: None) and to remove stopwords (from standard: no stopword removal)
-# tfidf_vectorizer = TfidfVectorizer(max_features=3000, stop_words='english')       
-# tfidf = tfidf_vectorizer.fit_transform(df['speech'])
+#Vectorise the speeches using TfidfVectorizer from scikit-learn.
+#Initialises TfidfVectorizer with adjusted parameters to 3000 max_features (from standard: None) and to remove stopwords (from standard: no stopword removal)
+tfidf_vectorizer = TfidfVectorizer(max_features=3000, stop_words='english')       
+tfidf = tfidf_vectorizer.fit_transform(df['speech'])
 
-# # Splitting of data into train and test sets using stratified sampling (proprtionally to fit dataset and sample)
+# Splitting of data into train and test sets using stratified sampling (proprtionally to fit dataset and sample)
 
-# # Split using stratified sampling based on 'party' (target variable)
-# # X is the TF-IDF matrix, y is party labels
-# y = df['party']         #label to predict
+# Split using stratified sampling based on 'party' (target variable)
+# X is the TF-IDF matrix, y is party labels
+y = df['party']         #label to predict
 
-# X_train, X_test, y_train, y_test = train_test_split(
-#     tfidf, y, 
-#     test_size=0.2,                  #default 80/20split
-#     random_state=26,                #for reproducible results
-#     stratify=y
-# )
+X_train, X_test, y_train, y_test = train_test_split(
+    tfidf, y, 
+    test_size=0.2,                  #default 80/20split
+    random_state=26,                #for reproducible results
+    stratify=y
+)
 
 # #PART_2 Q.2(c):
 
 warnings.filterwarnings('ignore') #to suppress not helpful warnings about zero division
 
-# #(1) Random forest classifier
-# rf_classifier = RandomForestClassifier(n_estimators=300, random_state=26)
-# rf_classifier.fit(X_train, y_train)
-# rf_predictions = rf_classifier.predict(X_test)      # Predict on test set
-# rf_f1_macro = f1_score(y_test, rf_predictions, average='macro')        # Calc macro-average F1 score
+#(1) Random forest classifier
+rf_classifier = RandomForestClassifier(n_estimators=300, random_state=26)
+rf_classifier.fit(X_train, y_train)
+rf_predictions = rf_classifier.predict(X_test)      # Predict on test set
+rf_f1_macro = f1_score(y_test, rf_predictions, average='macro')        # Calc macro-average F1 score
 
-# print(f"\nQ.2(c) Random Forest Macro-Average F1 Score: {rf_f1_macro:.4f}")
-# print("Q.2(c) Random Forest Classification Report:")
-# print(classification_report(y_test, rf_predictions))
-
-
-# #(2) SVM with Linear Kernel
-# svm_classifier = SVC(kernel='linear', random_state=26)
-# svm_classifier.fit(X_train, y_train)
-# svm_predictions = svm_classifier.predict(X_test)    # Predict on test set
-# svm_f1_macro = f1_score(y_test, svm_predictions, average='macro')       # Calc macro-average F1 score
-
-# print(f"\nQ.2(c) SVM Macro-Average F1 Score: {svm_f1_macro:.4f}")
-# print("Q.2(c) SVM Classification Report:")
-# print(classification_report(y_test, svm_predictions))
+print(f"\nQ.2(c) Random Forest Macro-Average F1 Score: {rf_f1_macro:.4f}")
+print("Q.2(c) Random Forest Classification Report:")
+print(classification_report(y_test, rf_predictions))
 
 
-# #PART_2 Q.2(d):
-# #TfidfVectorizer with parameters as in to Q2(b) & additionally: bi- and tri-grams (n_gram added)
+#(2) SVM with Linear Kernel
+svm_classifier = SVC(kernel='linear', random_state=26)
+svm_classifier.fit(X_train, y_train)
+svm_predictions = svm_classifier.predict(X_test)    # Predict on test set
+svm_f1_macro = f1_score(y_test, svm_predictions, average='macro')       # Calc macro-average F1 score
 
-# tfidf_vectorizer=TfidfVectorizer(max_features=3000, stop_words="english", ngram_range=(1,3))
-# tfidf=tfidf_vectorizer.fit_transform(df["speech"])
-
-# #splitting data into train & test set
-# y=df["party"]           #label to predict
-# X_train, X_test, y_train, y_test = train_test_split(
-#     tfidf, y, 
-#     test_size=0.2,                  #default 80/20split
-#     random_state=26,                #for reproducible results
-#     stratify=y
-# )
-
-# #(1) Random forest classifier
-# rf_classifier = RandomForestClassifier(n_estimators=300, random_state=26)
-# rf_classifier.fit(X_train, y_train)
-# rf_predictions = rf_classifier.predict(X_test)      # Predict on test set
-# rf_f1_macro = f1_score(y_test, rf_predictions, average='macro')        # Calc macro-average F1 score
-
-# print(f"\nQ.2(d) Random Forest Macro-Average F1 Score: {rf_f1_macro:.4f}")
-# print("Q.2(d) Random Forest Classification Report:")
-# print(classification_report(y_test, rf_predictions))
+print(f"\nQ.2(c) SVM Macro-Average F1 Score: {svm_f1_macro:.4f}")
+print("Q.2(c) SVM Classification Report:")
+print(classification_report(y_test, svm_predictions))
 
 
-# #(2) SVM with Linear Kernel
-# svm_classifier = SVC(kernel='linear', random_state=26)
-# svm_classifier.fit(X_train, y_train)
-# svm_predictions = svm_classifier.predict(X_test)    # Predict on test set
-# svm_f1_macro = f1_score(y_test, svm_predictions, average='macro')       # Calc macro-average F1 score
+#PART_2 Q.2(d):
+#TfidfVectorizer with parameters as in to Q2(b) & additionally: bi- and tri-grams (n_gram added)
 
-# print(f"\nQ.2(d) SVM Macro-Average F1 Score: {svm_f1_macro:.4f}")
-# print("Q.2(d) SVM Classification Report:")
-# print(classification_report(y_test, svm_predictions))
+tfidf_vectorizer=TfidfVectorizer(max_features=3000, stop_words="english", ngram_range=(1,3))
+tfidf=tfidf_vectorizer.fit_transform(df["speech"])
+
+#splitting data into train & test set
+y=df["party"]           #label to predict
+X_train, X_test, y_train, y_test = train_test_split(
+    tfidf, y, 
+    test_size=0.2,                  #default 80/20split
+    random_state=26,                #for reproducible results
+    stratify=y
+)
+
+#(1) Random forest classifier
+rf_classifier = RandomForestClassifier(n_estimators=300, random_state=26)
+rf_classifier.fit(X_train, y_train)
+rf_predictions = rf_classifier.predict(X_test)      # Predict on test set
+rf_f1_macro = f1_score(y_test, rf_predictions, average='macro')        # Calc macro-average F1 score
+
+print(f"\nQ.2(d) Random Forest Macro-Average F1 Score: {rf_f1_macro:.4f}")   #needed in order to compare with previous performance
+print("Q.2(d) Random Forest Classification Report:")
+print(classification_report(y_test, rf_predictions))
+
+
+#(2) SVM with Linear Kernel
+svm_classifier = SVC(kernel='linear', random_state=26)
+svm_classifier.fit(X_train, y_train)
+svm_predictions = svm_classifier.predict(X_test)    # Predict on test set
+svm_f1_macro = f1_score(y_test, svm_predictions, average='macro')       # Calc macro-average F1 score
+
+print(f"\nQ.2(d) SVM Macro-Average F1 Score: {svm_f1_macro:.4f}")       #needed in order to compare with previous performance
+print("Q.2(d) SVM Classification Report:")
+print(classification_report(y_test, svm_predictions))
 
 
 #PART_2 Q.2(e):
-#create my_toenizer to try to improve performance of ppppprevious function output for palamentary speeches
+#create my_tokenizer to try to improve performance of previous function output for palamentary speeches
 from nltk.stem import WordNetLemmatizer
 def my_tokenizer(text):
     tokens =word_tokenize(text.lower())
     stop_words = set(stopwords.words('english'))
+
+    parliamentary_stops = {"house", "need", "people"} 
+    stop_words.update(parliamentary_stops)
+
     lemmatizer = WordNetLemmatizer()
 
     lemmatized_tokens = []
@@ -141,11 +145,11 @@ def my_tokenizer(text):
             # Lemmatize the token
             lemma = lemmatizer.lemmatize(token)
             lemmatized_tokens.append(lemma)
-    
+
     return lemmatized_tokens
 
 tfidf_vectorizer=TfidfVectorizer(tokenizer=my_tokenizer, max_features=3000, 
-                                 ngram_range=(1,3), # uni- and bigrams only
+                                 ngram_range=(1,3), # uni-, bi and trigrams
                                   min_df=2,         #ignore terms occuring in less than 2 docs
                                   max_df=0.95,      #ignore frequent terms/in more than 95% of docs
                                   sublinear_tf=True)
@@ -158,28 +162,15 @@ X_train, X_test, y_train, y_test = train_test_split(
     tfidf, y, 
     test_size=0.2,                  #default 80/20split
     random_state=26,                #for reproducible results
-    stratify=y
+    stratify=y,
 )
 
-#class_weight='balanced'  # classes are strongly imbalanced, thus handle class imbalance
-
-#(1) Random forest classifier
-rf_classifier = RandomForestClassifier(n_estimators=300, random_state=26)  
-rf_classifier.fit(X_train, y_train)
-rf_predictions = rf_classifier.predict(X_test)      # Predict on test set
-rf_f1_macro = f1_score(y_test, rf_predictions, average='macro')        # Calc macro-average F1 score
-
-print(f"\nQ.2(e) Random Forest Macro-Average F1 Score: {rf_f1_macro:.4f}")
-print("Q.2(e) Random Forest Classification Report:")
-print(classification_report(y_test, rf_predictions))
-
-
-#(2) SVM with Linear Kernel
+#SVM with Linear Kernel - Best performing model
 svm_classifier = SVC(kernel='linear', random_state=26) 
 svm_classifier.fit(X_train, y_train)
 svm_predictions = svm_classifier.predict(X_test)    # Predict on test set
 svm_f1_macro = f1_score(y_test, svm_predictions, average='macro')       # Calc macro-average F1 score
 
-print(f"\nQ.2(e) SVM Macro-Average F1 Score: {svm_f1_macro:.4f}")
+print(f"\nQ.2(e) Best performing classifier: SVM Macro-Average F1 Score: {svm_f1_macro:.4f}") #needed in order to compare with previous performance
 print("Q.2(e) SVM Classification Report:")
 print(classification_report(y_test, svm_predictions))
