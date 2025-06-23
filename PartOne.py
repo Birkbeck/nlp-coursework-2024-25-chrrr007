@@ -1,4 +1,4 @@
-#Student ID: 12517261_Claudia Hering-Roehn
+#Student ID: 12517261_Claudia Herring-Roehn
 
 import nltk
 import spacy
