@@ -1,1 +1,39 @@
-Answers to the text questions go here.
+Student ID: 12517261
+Claudia Herring-Roehn
+
+
+Academic Declaration:
+“I have read and understood the sections of plagiarism in the College Policy
+on assessment oences and confirm that the work is my own, with the work
+of others clearly acknowledged. I give my permission to submit my report
+to the plagiarism testing database that the College is using and test it using
+plagiarism detection software, search engines or meta-searching software.”
+
+
+
+Part1 Question 1(d):
+The Flesch-Kincaid (“FK”) readability score is a way to measure the difficulty of a text. 
+Meaning the formular outputs a score indicating how readable (easy or hard) a text is. 
+It takes sentence length and syllable count into consideration. 
+
+This works well with standard texts that follow conventional English patterns. 
+However, for  texts which do not follow these patterns, have non-Western rhetorical structures, 
+or use complex metaphors and abstract concepts, that make comprehension challenging the FK might be
+a limited indicator for readability as it cannot pick up these patterns. 
+Equally challenging are non-standard structures, contractions or colloquials.
+
+Equally limitations of the FK score may occcure when dealing with complex ideas and concepts which are explained
+with basic vocabulary in short sentences to make it easier readable, as for instance in philosophical texts
+or mathematical proofs. Cognitive demands, conceptual difficulty and sophisticated abstract reasoning cannot
+be detected by the formular. 
+
+This is also valid when text contains specialized terminology, jargon, or technical concepts,
+whilst generally written in basic vocabulary with short sentences. FK doesn’t count for required expert knowledge of a topic, highly technical or specific vocabulary and understanding in order to gain understanding of the text. 
+
+So the FK score might indicate an easy read for the above, whilst it is incomprehensible for an untrained reader.
+
+
+Reference: Lecture 3
+
+
+Part_2 Qestion 2(f):
