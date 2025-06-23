@@ -15,6 +15,12 @@ plagiarism detection software, search engines or meta-searching software.”
 General note:
 I decided to create a new "test.py" document to develop my code to start from a blank page and copy the provided starter code snippets in order as needed. This appeared cleaner and allowed me to keep the starter code and cleary mark developed parts as done. The commit history will show on the test.py, rather than on the PartOne.py. Once all code is developed I am planning on renaming the test.py to PartOne.py
 
+Important regarding Git history:
+As discussed at the end of the lab_7 session. I regularly made commits (46) at the time, but did not push them. When I tried to push them I got a 500 error, caused by the fact that I did not add the pickle file to the gitignore, once I created it. I solve the issue by removing and re-writing the Git history. 
+As I had almost finished the coursework by this time, pushing the already finished codes, might look not like the commit history expected and how I did it in the first place. 
+Given that the commit history carries a significant amount of marks, I am obviously afraid to lose my commit history in the process above. 
+I took screen shots of the commit history (46 commits) at that point and forwarded those by email as proof that I diligently followed the commit process required.
+
 
 
 Result output: Part One 1.(a)(i):
