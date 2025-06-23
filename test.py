@@ -1,3 +1,4 @@
+#Student ID: 12517261_Claudia Hering-Roehn
 
 import nltk
 import spacy
@@ -95,7 +96,7 @@ def calculate_ttr_dict(path=Path.cwd() / "p1-texts" / "novels"):
     ttr_dict ={}
 
     txt_files = list(path.glob("*.txt"))
-    print(f"Found {len(txt_files)} files to process:")          #not required but useful check if all files processed
+    # print(f"Found {len(txt_files)} files to process:")          #not required but useful check if all files processed
 
     # Process each text file
     for txt_file in txt_files:
@@ -113,25 +114,14 @@ def calculate_ttr_dict(path=Path.cwd() / "p1-texts" / "novels"):
             ttr = nltk_ttr(content)
 
             ttr_dict[title]=ttr
-            print(f"Processed: {title} -> TTR: {ttr:.4f}")
+            # print(f"Processed: {title} -> TTR: {ttr:.4f}")      #not required but useful check
 
         except Exception as e:
             print(f"Error processing {txt_file}: {e}")
 
-    print(f"Total entries in dictionary: {len(ttr_dict)}\n")  # to check as it didn't work 
+    print(f"Q1.(b)Total entries in dictionary: {len(ttr_dict)}\n")  # to check if all processed 
     return ttr_dict
     
-# Check if texts are cleaned like this:
-#     # remove punctuation using regular expressions
-#     # this line of code locates the punctuation within the given text and compiles that punctuation into a single variable
-#     re_punc = re.compile('[%s]' % re.escape(string.punctuation))
-#     # this line of code substitutes the punctuation we just compiled with nothing ''
-#     tokens = [re_punc.sub('', token) for token in tokens]
-
-#     # only include tokens that aren't numbers
-#     tokens = [token for token in tokens if token.isalpha()]
-#     return tokens
-
 
 #----------------------------    
 # Part One 1.(c):
@@ -193,7 +183,7 @@ def fk_level(text, d):
 
     grade_level = (0.39 * avg_sentence_length) + (11.8 * avg_syllables_per_word) - 15.59
  
-    # print(f"Sentences: {len(sentences)}")                         #got weird FK-scores added as a check to see if those numbers are in expected range
+    # print(f"Sentences: {len(sentences)}")                         #got weird FK-scores added as check to see if those numbers are in expected range
     # print(f"Filtered tokens: {len(filtered_tokens)}")
     # print(f"Avg sentence length: {avg_sentence_length}")
     # print(f"Total syllables: {total_syllables}")
@@ -232,18 +222,18 @@ def parse(df, store_path=Path.cwd() / "pickles", out_name="parsed.pickle"):
     Parses the text of a DataFrame using spaCy, stores the parsed docs as a column and writes 
     the resulting  DataFrame to a pickle file"""
 
-    print(f"Processing {len(df)} texts with spaCy...")
-    df['parsed'] = df['text'].apply(nlp)
-    print("spaCy processing finished! \n")
+    # print(f"Processing {len(df)} texts with spaCy...")
+    # df['parsed'] = df['text'].apply(nlp)
+    # print("spaCy processing finished! \n")
     
-    print("About to start serialization...")  # implemented as code didn't run, seems useful to see wher problems occure
+    # print("Serialization...")  # implemented as code didn't run, seems useful to see wher problems occure
     
     try:
-        print("Creating directory...")  # implemented as code didn't run, seems useful to see where problems occure
+        # print("Creating directory...")  # implemented as code didn't run, seems useful to see where problems occure
         store_path.mkdir(exist_ok=True)
         
         filepath = store_path / out_name
-        print(f"Serializing DataFrame to {filepath} \n")
+        print(f"Serializing DataFrame to {filepath}")
         
         with open(filepath, "wb") as f:
             pickle.dump(df, f)
@@ -253,7 +243,7 @@ def parse(df, store_path=Path.cwd() / "pickles", out_name="parsed.pickle"):
     except Exception as e:
         print(f"Error during serialization: {e}")
     
-    print("Function ending...")  # confirmation for exceution - felt useful
+    # print("Done...")  # confirmation for exceution - felt useful
 
 # Part One 1.(e)(iii):    
     return df
@@ -273,24 +263,6 @@ def syntactic_objects_counts(doc):
         
     return syntactic_objects.most_common(10)
 
-
-# def adjective_counts(df):             #check if this function is required as question asks for syntactic objects
-#     """Extracts the most common adjectives for each novel in DataFrame. 
-#        Returns dictinary"""
-#     results={}
-
-#     for i, row in df.iterrows():
-#         title = row['title']
-#         doc = row['parsed'] 
-
-#     adjectives=Counter()
-#     for token in doc:
-#             if token.pos_ == "ADJ":
-#                 adjectives[token.lemma_] += 1
-
-#     results[title] =adjectives.most_common(10)             # Returns the 10 most common adjectives
-    
-#     return results
 
 # Part One 1.(f)(ii):
 def subjects_by_verb_count(doc, verb):
@@ -360,6 +332,7 @@ def main():
     print(path)
     print()
     df=read_novels(path)
+    print(f"Q1.(a)(ii)_DF sorted by year:")
     print(df.head())
     print()
 
@@ -369,7 +342,7 @@ def main():
    
     # Calculate TTR for all novels
     ttr_results = calculate_ttr_dict()
-    print(f"TTRs:")
+    print(f"Q1.(b)_TTRs:")
     print(get_ttrs(df))
     print()
 
@@ -381,46 +354,44 @@ def main():
     #     print(f"{title:<30}: {ttr:.4f}")
 
 # Part One 1.(c)
-    print(f"Flesch_Kincaide_scores:")
+    print(f"Q1.(c)_Flesch_Kincaide_scores:")
     print(get_fks(df))
     print()
 
 # # Part One 1.(e)(i) & 1.(e)(iii): 
 
-#     df_parsed = parse(df) # to add parsed column to existing df and saves to pickle file
+    df_parsed = parse(df) # to add parsed column to existing df and saves to pickle file
 
 
-# # # Part One 1.(e)(iv): 
+# Part One 1.(e)(iv): 
 
-#     df= pd.read_pickle(Path.cwd() / "pickles" / "parsed.pickle")        #load Df from pickle file
+    df= pd.read_pickle(Path.cwd() / "pickles" / "parsed.pickle")        #load Df from pickle file
     
-#     print(f"Loaded DataFrame with {len(df)} texts")          # To make sure DataFrame loaded
-#     print(f"Columns: {list(df.columns)}")
-#     print(df.head())
+    print(f"\nQ1.(e)(iv)_Loaded DataFrame with {len(df)} texts:")          # To make sure DataFrame loaded
+    print(f"Columns: {list(df.columns)}")
+    print(df.head())
     
-#     print("TTR scores from loaded DataFrame:")      #to compare to nltk approach
-#     print(get_ttrs(df))
-#     print()
+    # print("\nTTR scores from loaded DataFrame:")      #to compare to nltk approach not required 
+    # print(get_ttrs(df))
+    
 
-#     print("Flesch-Kincaid scores from loaded DataFrame:") #to compare to nltk approach
-#     print(get_fks(df))
-#     print()
+    # print("\nFlesch-Kincaid scores from loaded DataFrame:") #to compare to nltk approach not required
+    # print(get_fks(df))
+    # print()
 
-#     # first_doc = df.iloc[0]['parsed']                        #just to get a feeling for the data
-#     # print(f"First novel has {len(first_doc)} tokens")
-#     # print(f"Sample tokens: {[token.text for token in first_doc[:10]]}")
+    # first_doc = df.iloc[0]['parsed']                        #just to get a overview for the data
+    # print(f"First novel has {len(first_doc)} tokens")
+    # print(f"Sample tokens: {[token.text for token in first_doc[:10]]}")
 
 # Part One 1.(f)(i):
 
     df = pd.read_pickle(Path.cwd() / "pickles" / "parsed.pickle")
-    print("syntactic_objects_counts:")          
+    print("\nQ1.(f)(i)_syntactic_objects_counts:")          
     for i, row in df.iterrows():
         print(row["title"])
         print(syntactic_objects_counts(row["parsed"]))
         print("\n")
 
-    # print(f"\n adj count \n")     #check if this function is required as Q1(f)(i) asks for syntactic objects
-    # print(adjective_counts(df))
 
 # Part One 1.(f)(ii):
     # df = pd.read_pickle(Path.cwd() / "pickles" / "parsed.pickle")
@@ -429,6 +400,7 @@ def main():
         print(row["title"])
         print(subjects_by_verb_count(row["parsed"], "hear"))
         print("\n")
+
 
 # Part One 1.(f)(iii):
     print("subjects_by_verb_pmi:")

@@ -13,7 +13,7 @@ plagiarism detection software, search engines or meta-searching software.”
 
 
 General note:
-I decided to create a new "test.py" document to develop my code to start from a blank page aand copy the provided starter code snippets in order as needed. This appeared cleaner and allowed me to keep the starter code and cleary mark developed parts as done. The commit history will show on the test.py, rather than on the PartOne.py. Once all code is developed I am planning on renaming the test.py to PartOne.py
+I decided to create a new "test.py" document to develop my code to start from a blank page and copy the provided starter code snippets in order as needed. This appeared cleaner and allowed me to keep the starter code and cleary mark developed parts as done. The commit history will show on the test.py, rather than on the PartOne.py. Once all code is developed I am planning on renaming the test.py to PartOne.py
 
 
 
@@ -64,21 +64,19 @@ The_Secret_Garden             : 0.0585
 ```
 
 
-Result output: Part One 1.(d):
+Result output: Part One 1.(c):
 ```
 Flesch_Kincaide_scores:
 {'Sense and Sensibility': 10.8894, 'North and South': 6.6553, 'A Tale of Two Cities': 9.843, 'Erewhon': 14.6793, 'The American': 7.9875, 'Dorian Gray': 4.9493, 'Tess of the DUrbervilles': 7.6292, 'The Golden Bowl': 12.4424, 'The Secret Garden': 4.6525, 'Portrait of the Artist': 6.4493, 'The Black Moth': 4.2087, 'Orlando': 9.5421, 'Blood Meridian': 5.6345}
 ```
 
+Part One 1.(d): see answer.txt
+
+
 Result output: Part One 1.(e)(ii):
 ```
-About to start serialization...
-Creating directory...
 Serializing DataFrame to C:\Users\ClaudiaRoehn\Desktop\New folder\OneDrive - Home\0_NLP\nlp-coursework-2024-25-chrrr007\pickles\parsed.pickle
-
 DataFrame saved as parsed.pickle
-
-Function ending...
 ```
 
 
